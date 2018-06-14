@@ -6,7 +6,7 @@
             <img class="imghe1" src="../../assets/img/phone.png">
             <span class="textheader">咨询</span>
           </div>
-          <input class="inpheader" type="text" />
+          <input class="inpheader" type="text" placeholder="搜索目的地" />
         </div>
     </div>
     <div></div>
@@ -28,19 +28,19 @@
   .header{
     width: 750px;
     height: 92px;
-    line-height: 92px;
+    line-height: 90px;
     background-color: pink;
 
   }
   .inpheader{
-    width: 400px;
+    width: 550px;
     height: 64px;
     border-radius: 30px;
-    margin-left: 30px;
+    margin-left: 20px;
   }
   .imghe{
     float: left;
-    background-color: orange;
+    margin-left: 30px;
   }
   .imghe1{
     width: 20px;
