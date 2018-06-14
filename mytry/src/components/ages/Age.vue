@@ -1,5 +1,5 @@
 <template>
-<div>年龄</div>
+    <div>年龄</div>
 </template>
 
 <script>
