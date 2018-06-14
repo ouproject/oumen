@@ -2,11 +2,24 @@
     <div>
       <router-view></router-view>
       <div class="mineheader">
-        <router-link tag="span" :to="{path:'/user'}">
-          <div class="mineimg">
-            <img src="../../assets/img/tg.jpg">
+          <router-link tag="span" :to="{path:'/user'}">
+            <div class="mineimg">
+              <img src="../../assets/img/tg.jpg">
+            </div>
+          </router-link>
+          <div class="logins">
+            <span>登录</span>
+            <span>/注册</span>
           </div>
-        </router-link>
+          <div class="minebottom">
+
+          </div>
+      </div>
+      <div class="mineline"></div>
+      <div class="minenav">
+        <div class="mineuser"></div>
+        <div class=""></div>
+        <div></div>
       </div>
     </div>
 </template>
@@ -39,4 +52,26 @@
   width: 100px;
   height: 100px;
 }
+  .logins{
+    position: relative;
+    left: 45%;
+    margin-top: 20px;
+    color: white;
+  }
+  .minebottom{
+    height: 80px;
+    width: 100%;
+    position: relative;
+    bottom: -84px;
+    background-color: rgba(7,17,27,0.4);
+  }
+  .mineline{
+    height: 32px;
+    width: 100%;
+    background-color: #f0eff5;
+  }
+  .minenav{
+    height: 252px;
+    width: 100%;
+  }
 </style>
