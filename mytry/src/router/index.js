@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import Age from '@/components/ages/Age'
 import Mine from '@/components/mine/Mine'
 import Pages from '@/components/pages/Pages'
-import Users from '@/components/user/user'
+import Users from '@/components/user/User'
 
 Vue.use(Router)
 
