@@ -16,7 +16,6 @@ Vue.prototype.baseUrl = "/api"; //全局的变量
 
 
 Vue.use(Mint);
-
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

@@ -6,7 +6,8 @@
             <img class="imghe1" src="../../assets/img/phone.png">
             <span class="textheader">咨询</span>
           </div>
-          <input class="inpheader" type="text" placeholder="搜索目的地、关键词、年龄等" />
+          <input v-model="currentValue" class="inpheader" type="text" placeholder="搜索目的地、关键词、年龄等" />
+          <div class="serchadd" @click="Searchs">确定</div>
         </div>
         <div class="pagelunbo">
           <div class="swiper-container">
@@ -119,22 +120,41 @@
 <script>
   import Swiper from 'swiper';
     export default {
-        name: "Pages",
-        mounted(){
-          new Swiper ('.swiper-container', {
-            loop: true,
-            autoplay:true,
-            // 如果需要分页器
-            pagination: {
-              el: '.swiper-pagination',
-            },
+      name: "Pages",
+      data: function () {
+        return {
+          currentValue:this.value
+        }
+      },
+      methods: {
+        Searchs() {
+          this.$router.push({
+            path: '/searchlist',
+            query: {
+              selwords:this.currentValue
+            }
+
           })
         }
+      },
+      mounted(){
+        new Swiper('.swiper-container', {
+          loop: true,
+          autoplay: true,
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination',
+          },
+        })
+      }
     }
 
 </script>
 
 <style scoped>
+  a{
+    text-decoration: none;
+  }
 .pagediv{
   width: 750px;
   height: 820px;
@@ -147,10 +167,12 @@
     /*background-color: pink;*/
     position: fixed;
     z-index: 10;
+    top: 10px;
+    display: flex;
 
   }
   .inpheader{
-    width: 550px;
+    width: 490px;
     height: 64px;
     border-radius: 30px;
     margin-left: 20px;
@@ -171,6 +193,21 @@
     font-size: 30px;
     font-weight: 100;
   }
+
+  .serchadd{
+    width: 90px;
+    height: 80px;
+    text-align: center;
+    background-color: deepskyblue;
+    border-radius: 20px;
+    margin-left: 10px;
+    color: white;
+    font-size: 26px;
+  }
+
+
+
+
 /*轮播图的样式*/
   .pagelunbo{
     width: 750px;
