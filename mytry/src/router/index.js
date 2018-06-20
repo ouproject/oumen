@@ -74,7 +74,23 @@ export default new Router({
     {
       path:'/time',
       component:WriteTime
-    }
+    },
+    {
+      path:'/login',
+      component:Login
+    },
+    {
+      path:'/register',
+      component:Register
+    },
+    {
+      path:'/list',
+      component:List
+    },
+    {
+      path:'/wirteInfo',
+      component:WirteInfo
+    },
 
 
 

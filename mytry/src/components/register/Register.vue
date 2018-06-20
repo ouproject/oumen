@@ -170,7 +170,7 @@
   .reg{
     width: 180px;
     height: 50px;
-    background-color: #0fa9ff;
+    /*background-color: #0fa9ff;*/
     color: white;
     /*border:1px solid red;*/
     -webkit-border-radius: 50px;
