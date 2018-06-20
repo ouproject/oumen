@@ -7,7 +7,7 @@
         <div><i class="icon-user"></i></div>
         <div>首页</div>
       </router-link>
-      <router-link class="footItem" tag="span" :to="{path:'/ages'}">
+      <router-link class="footItem" tag="span" :to="{path:'/time'}">
         <div><i class="icon-sphere"></i></div>
         <div> 年龄</div>
       </router-link>

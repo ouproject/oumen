@@ -1,11 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
+
+
 import Age from '@/components/ages/Age'
 import Mine from '@/components/mine/Mine'
 import Pages from '@/components/pages/Pages'
 import Users from '@/components/user/User'
+<<<<<<< HEAD
+=======
+import Order from '@/components/user/Order'
+import Collect from '@/components/user/Collect'
+import Family from '@/components/user/Family'
+import Orderdetail from '@/components/user/Orderdetail'
+import Familynum from '@/components/user/Familynum'
+import Searchlist from '@/components/list/Searchlist'
+import WriteTime from '@/components/listDetail/WriteTime'
 
+>>>>>>> c76e19199c7d3985c79dec8be965b39a67fe806a
+import Register from '@/components/register/Register'
+import Login from '@/components/register/Login'
+import List from '@/components/list/List'
+import WirteInfo from '@/components/listDetail/WirteInfo'
+<<<<<<< HEAD
+=======
+
+>>>>>>> c76e19199c7d3985c79dec8be965b39a67fe806a
 Vue.use(Router)
 
 export default new Router({
@@ -14,11 +33,10 @@ export default new Router({
     {
       path: '/',
       redirect:'/pages'
-      // name: 'HelloWorld',
-      // component: HelloWorld
     },
     {
       path:'/pages',
+      name:'pages',
       component:Pages
     },
     {
@@ -32,6 +50,56 @@ export default new Router({
     {
       path:'/user',
       component:Users
+    },
+    {
+<<<<<<< HEAD
+=======
+      path:'/order',
+      component:Order
+    },
+    {
+      path:'/collect',
+      component:Collect
+    },
+    {
+      path:'/family',
+      component:Family
+    },
+    {
+      path:'/orderdetail',
+      component:Orderdetail
+    },
+    {
+      path:'/familynum',
+      component:Familynum
+    },
+    {
+      path:'/searchlist',
+      name:'searchlist',
+      component:Searchlist
+    },
+    {
+      path:'/time',
+      component:WriteTime
+    },
+    {
+>>>>>>> c76e19199c7d3985c79dec8be965b39a67fe806a
+      path:'/register',
+      component:Register
+    },
+    {
+      path:'/login',
+      component:Login
+    },
+    {
+      path:'/list',
+      component:List
+    },
+    {
+      path:'/wirteInfo',
+      component:WirteInfo
     }
+
+
   ]
 })
