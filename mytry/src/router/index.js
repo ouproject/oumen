@@ -12,7 +12,7 @@ import Family from '@/components/user/Family'
 import Orderdetail from '@/components/user/Orderdetail'
 import Familynum from '@/components/user/Familynum'
 import Searchlist from '@/components/list/Searchlist'
-
+import WriteTime from '@/components/listDetail/WriteTime'
 
 Vue.use(Router)
 
@@ -64,6 +64,10 @@ export default new Router({
       path:'/searchlist',
       name:'searchlist',
       component:Searchlist
+    },
+    {
+      path:'/time',
+      component:WriteTime
     },
   ]
 })
