@@ -14,6 +14,11 @@ import Familynum from '@/components/user/Familynum'
 import Searchlist from '@/components/list/Searchlist'
 import WriteTime from '@/components/listDetail/WriteTime'
 
+import Register from '@/components/register/Register'
+import Login from '@/components/register/Login'
+import List from '@/components/list/List'
+import WirteInfo from '@/components/listDetail/WirteInfo'
+
 Vue.use(Router)
 
 export default new Router({
@@ -69,5 +74,21 @@ export default new Router({
       path:'/time',
       component:WriteTime
     },
+    {
+      path:'/register',
+      component:Register
+    },
+    {
+      path:'/login',
+      component:Login
+    },
+    {
+      path:'/list',
+      component:List
+    },
+    {
+      path:'/wirteInfo',
+      component:WirteInfo
+    }
   ]
 })
