@@ -55,14 +55,47 @@
           <p class="timeperson1">选择出行人数</p>
           <div class="timeadd">
             <div class="addperson">
-                <div>
-                  <span></span>
-                  <span>成人</span>
+                <div class="addperson1">
+                  <span class="addspan1">
+                    <span class="delnum1" @click="delnum1">-</span>
+                    <span class="nummber1 nummbersone">{{num}}</span>
+                    <span class="addnum1" @click="addnum1">+</span>
+                  </span>
+                  <span class="addspan2">成人</span>
                 </div>
+                <p class="moneynums1">￥{{prices}}</p>
             </div>
             <div class="addchild">
-
+              <div class="addperson1">
+                  <span class="addspan1">
+                    <span class="delnum1" @click="delnum2">-</span>
+                    <span class="nummber1">{{nummber}}</span>
+                    <span class="addnum1" @click="addnum2">+</span>
+                  </span>
+                <span class="addspan2">儿童</span>
+              </div>
+              <p class="moneynums1">￥{{prices1}}</p>
             </div>
+          </div>
+        </div>
+        <div class="mineline"></div>
+        <div class="zhu">
+          <p class="zhu1">关于儿童定价的特别提醒</p>
+          <p class="zhu2">儿童定价标准：年龄2-12周岁，不占床，含往返机票、半价、正餐、旅游车车位、不含门票、早餐</p>
+        </div>
+        <div class="timefoot">
+          <div class="bottoms">
+            <p class="bottoms1">
+              <span>出发时间：</span>
+              <span class="timenum">2015-08-12</span>
+            </p>
+            <p class="bottoms2">
+              <span>出行人数:</span>
+              <span class="timenum">{{num}}成人 {{nummber}}儿童</span>
+            </p>
+          </div>
+          <div class="infowrite">
+            <span class="infowrite1">填写信息</span>
           </div>
         </div>
       </div>
@@ -72,26 +105,52 @@
 <script>
     export default {
         name: "WriteTime",
-      data: function () {
-        return {
-          currentDay: 1,
-          currentMonth: 1,
-          currentYear: 1970,
-          currentWeek: 1,
-          days: [],
-          leftobj:[    //存放剩余数量
-            {count:1},
-            {count:2},
-            {count:3},
-            {count:4},
-            {count:5},
-          ]
-        }
-      },
+        data: function () {
+          return {
+            num:0,
+            nummber:0,
+            prices:36700,
+            prices1:26700,
+            currentDay: 1,
+            currentMonth: 1,
+            currentYear: 1970,
+            currentWeek: 1,
+            days: [],
+            leftobj:[    //存放剩余数量
+              {count:1},
+              {count:2},
+              {count:3},
+              {count:4},
+              {count:5},
+            ]
+          }
+        },
       created: function() {  //在vue初始化时调用
         this.initData(null);
       },
       methods: {
+        delnum1(){
+          this.prices =36700;
+          if(this.num>0){
+            this.num--;
+            this.prices = this.prices * this.num;
+          }
+        },
+        addnum1(){
+            this.num++;
+            this.prices = this.prices * this.num;
+        },
+        delnum2(){
+          this.prices1 =26700;
+          if(this.nummber>0){
+            this.nummber--;
+            this.prices1 = this.prices1 * this.nummber;
+          }
+        },
+        addnum2(){
+          this.nummber++;
+          this.prices1 = this.prices1 * this.nummber;
+        },
         order:function (day) {  //预定函数
           if(this.leftobj[day.index].count>=1)
             this.leftobj[day.index].count--;
@@ -207,7 +266,7 @@
   .timeperson{
     color: #6b6b6b;
     font-size: 28px;
-    background-color: orange;
+    background-color: white;
 
   }
   .timeperson1{
@@ -216,16 +275,16 @@
   .timeadd{
     width: 100%;
     height: 160px;
-    background-color: pink;
+    /*background-color: pink;*/
     display: flex;
   }
   .addperson{
     flex: 1;
-    background-color: deepskyblue;
+    /*background-color: deepskyblue;*/
   }
   .addchild{
     flex: 1;
-    background-color: yellow;
+    /*background-color: yellow;*/
   }
   * {
     box-sizing: border-box;
@@ -346,5 +405,123 @@
   .days li:hover {
     background: #e1e1e1;
   }
+
+
+
+  .addperson1{
+    text-align: center;
+  }
+
+
+  .addspan1{
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    line-height: 100px;
+    /*background-color: pink;*/
+    text-align: center;
+    border: 2px solid #e1e1e1;
+  }
+  .addspan2{
+
+  }
+  .moneynums1{
+    color: orange;
+    margin-left: 60px;
+  }
+  .delnum1{
+    display: inline-block;
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 32px;
+    text-align: center;
+    /*background-color: rebeccapurple;*/
+    border-right:2px solid #e1e1e1;
+    box-sizing: border-box;
+  }
+  .addnum1{
+    display: inline-block;
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 32px;
+    text-align: center;
+    /*background-color: red;*/
+    border-left:2px solid #e1e1e1;
+    box-sizing: border-box;
+  }
+  .nummber1{
+   display: inline-block;
+    width: 50px;
+  }
+  .zhu{
+    overflow: hidden;
+    /*background-color: blue;*/
+    height: 150px;
+  }
+  .zhu1{
+    /*background-color: orange;*/
+    margin-top: 20px ;
+    padding-left: 20px;
+    font-size: 28px;
+  }
+  .zhu2{
+    /*background-color: pink;*/
+    padding-left: 20px;
+    font-size: 22px;
+    color: #b1b2b3;
+  }
+
+  .timefoot{
+    position: relative;
+    height: 120px;
+    width: 100%;
+    display: flex;
+    background-color: white;
+    z-index: 6;
+  }
+
+  .bottoms{
+    flex: 1;
+  }
+  .bottoms1{
+    background-color: white;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+  }
+
+  .bottoms2{
+    /*background-color: skyblue;*/
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+
+  }
+
+  .infowrite{
+    flex: 1;
+  }
+  .infowrite1{
+    display: inline-block;
+    height: 100px;
+    line-height: 100px;
+    width: 320px;
+    color: white;
+    background-color: orange;
+    text-align: center;
+    border-radius: 40px;
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+  .timenum{
+    color: orange;
+  }
+
+
+
+
+
 
 </style>
