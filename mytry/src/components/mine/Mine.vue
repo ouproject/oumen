@@ -26,17 +26,17 @@
       </div>
       <div class="mineline"></div>
       <div class="minenav">
-        <router-link tag="span" :to="{path:'/order'}">
+        <!--<router-link tag="span" :to="{path:'/order'}">-->
           <div class="mineorder">
             <div class="orderimg">
               <img src="../../assets/img/copy.png">
             </div>
-            <div class="myorder">我的订单</div>
+            <div class="myorder" @click="selOrder">我的订单</div>
             <div class="oderimgs">
               <img src="../../assets/img/arrow-right.png">
             </div>
           </div>
-        </router-link>
+        <!--</router-link>-->
         <router-link :to="{path:'/collect'}">
           <div class="mineorder">
             <div class="orderimg" id="orderimg1">
@@ -86,7 +86,27 @@
 </template>
 <script>
     export default {
-        name: "Mine"
+        name: "Mine",
+        data:function(){
+            return {
+              tel:""
+            }
+        },
+      mounted:function(){
+          console.log("tel----------",this.$route.query.tel);
+      },
+        methods:{
+          //点击查看订单--判断是否是登陆状态
+          selOrder(){
+            console.log("000000");
+            this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder')
+              .then((res) => {
+                console.log(res.data);
+              }).catch((err) => {
+              console.log(err)
+            })
+          }
+        }
     }
 </script>
 

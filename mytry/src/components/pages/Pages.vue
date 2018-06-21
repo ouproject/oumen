@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="travelnums">
-          <router-link :to="{path:'/wirteInfo',query:{tour_type:'境外亲子游'}}">
+          <router-link :to="{path:'/list',query:{tour_type:'境外亲子游'}}">
             <div class="travelItem">
               <img src="../../assets/img/rb.jpg">
               <p>境外亲子游</p>

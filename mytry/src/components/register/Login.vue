@@ -64,6 +64,7 @@
                 this.$router.push({
                   path: '/'
                 })
+
               }else if(res.data=='pwdFail'){
                 $(".erroPromt").html("密码错误").show();
               }
