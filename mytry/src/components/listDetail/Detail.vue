@@ -129,13 +129,14 @@
           </li>
         </ul>
       </div>
-
       <div class="route">
         <ul>
-          <li class="xingCheng blue" @click="xingCheng">行程安排</li>
+          <li :class="isShows?'blue':'xingCheng'" @click="xingCheng">行程安排</li>
           <li>温馨提示</li>
-          <li class="pingJia" @click="pingJia">评价(987)</li>
+          <li :class="isShow?'blue':'pingJia'" @click="pingJia">评价(987)</li>
         </ul>
+      </div>
+      <div class="route" v-show="isShows">
         <div class="stroke">
           <span class="pag">第1天</span>
           <span>北京 - 首尔</span>
@@ -199,7 +200,7 @@
         </div>
       </div>
 
-      <div class="evaluate">
+      <div class="evaluate" v-show="isShow">
         <ul>
           <li class="first">
             <img src="../../assets/img/fengjing.png" />
@@ -252,7 +253,9 @@
       return{
         Detail:[],
         imgurl:"",
-        reson:[]
+        reson:[],
+        isShow:false,
+        isShows:true
       }
     },
     mounted(){
@@ -281,16 +284,12 @@
     },
     methods:{
       xingCheng(){
-        $('.stroke').css('display','block');
-        $('.evaluate').css('display','none');
-        $('.pingJia').removeClass('blue');
-        $('.xingCheng').addClass('blue');
+        this.isShows = true;
+        this.isShow = false;
       },
       pingJia(){
-        $('.stroke').css('display','none');
-        $('.evaluate').css('display','block');
-        $('.xingCheng').removeClass('blue');
-        $('.pingJia').addClass('blue');
+        this.isShow = true;
+        this.isShows = false;
       },
       buy(){
         this.$router.push({
@@ -646,7 +645,7 @@
   }
   .evaluate{
     background-color: white;
-    display: none;
+    /*display: none;*/
   }
   .evaluate ul .first{
     margin-top: 0;
