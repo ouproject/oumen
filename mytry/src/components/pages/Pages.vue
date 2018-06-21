@@ -6,7 +6,7 @@
             <img class="imghe1" src="../../assets/img/phone.png">
             <span class="textheader">咨询</span>
           </div>
-          <input v-model="currentValue" class="inpheader" type="text" placeholder="搜索目的地、关键词、年龄等" />
+          <input v-model="currentValue" class="inpheader" type="text" placeholder="目的地、关键词等" />
           <div class="serchadd" @click="Searchs">确定</div>
         </div>
         <div class="pagelunbo">
@@ -124,7 +124,9 @@
 </template>
 
 <script>
+  // 引入轮播图插件
   import Swiper from 'swiper';
+
     export default {
       name: "Pages",
       data: function () {

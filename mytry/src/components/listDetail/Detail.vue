@@ -230,6 +230,7 @@
           <img src="../../assets/img/zixun.png" />
           咨询
         </span>
+
         <span class="buy" @click="buy">立即购买</span>
       </div>
 
