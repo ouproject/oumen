@@ -8,21 +8,28 @@
       <ul class="orderBox">
         <li class="orderItem order01">
           <div class="orderContent">
-            <span>综合排序</span>
-            <img class="orderIcon" src="../../assets/img/down.png" alt="">
+            <span class="order_active">综合排序</span>
+            <i class="icon-down" style="font-size: 30px"></i>
           </div>
-          <!--<ul>-->
-            <!--<li>综合排序</li>-->
-            <!--<li>价格从高到低</li>-->
-            <!--<li>价格从低到高</li>-->
-            <!--<li>即将出发</li>-->
-          <!--</ul>-->
+          <ul class="order01_01">
+            <li class="order01_01_li">
+              <span class="order_active">综合排序</span>
+              <i class="icon-duihao" style="font-size: 30px"></i>
+            </li>
+            <li>价格从高到低</li>
+            <li>价格从低到高</li>
+            <li>即将出发</li>
+          </ul>
         </li>
         <li class="orderItem order02">
-          <div>关注度优先</div>
+          <div class="orderContent">关注度优先</div>
         </li>
         <li  class="orderItem order03">
-          <div>筛选</div>
+          <div class="order03Content">
+            <span>筛选</span>
+            <!--<img class="orderIcon" src="../../assets/img/down.png" alt="">-->
+          </div>
+
         </li>
 
       </ul>
@@ -46,6 +53,7 @@
 </script>
 
 <style scoped>
+  @import "../../assets/IcomingRyp/style.css";
   .usersheader{
     height: 80px;
     font-size: 32px;
@@ -58,19 +66,54 @@
   }
   .orderBox{
     display: flex;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
     align-items: center;
     border-top: 1px solid #ccc;
+
   }
   .orderItem{
-    height: 50px;
-    padding: 20px;
-    border-right: 1px solid #ccc;
+    height: 70px;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    position: relative;
   }
   .orderContent{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-right: 10px;
+    margin-top: 10px;
+    padding: 5px;
+    border-right: 1px solid #ccc;
+  }
+  .order03Content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding: 5px;
+  }
+  .orderIcon{
+    margin-left: 10px;
+  }
+  .order01_01{
+    width: 750px;
+    position: absolute;
+    top:80px;
+    left: 20px;
+  }
+  .order01_01>li{
+    height: 70px;
+    line-height: 70px;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: space-between;
+  }
+  .icon-duihao{
+    margin-right: 50px;
+  }
+  .order_active{
+    color: deepskyblue;
   }
 </style>
