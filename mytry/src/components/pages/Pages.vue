@@ -66,7 +66,7 @@
         <span class="navitem2">精选亲子出行路线</span>
       </div>
       <div class="pageslots">
-        <div @click="Detail" class="pagelot" v-for="(v,k) in vvipData">
+        <div v-for="(v,k) in vvipData" @click="Detail(k)" class="pagelot" >
             <div class="pagelot1">
               <img src="../../assets/img/lot1.jpg">
               <span class="lothui">超值特惠</span>
@@ -124,10 +124,10 @@
 
           })
         },
-        Detail(){
+        Detail(index){
           this.$router.push({
             path: '/detail',
-            query:'vvip'
+            query:{type:'vvip',datas:this.vvipData[index]}
           })
         }
       },
@@ -145,7 +145,7 @@
         this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selvip')
           .then((res) => {
             this.vvipData= res.data;
-            //console.log("vvipData-------",this.vvipData);
+            console.log("vvipData-------",this.vvipData);
           }).catch((err) => {
           console.log(err)
         })

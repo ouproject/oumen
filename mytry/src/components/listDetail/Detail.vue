@@ -251,7 +251,7 @@
     name: "Detail",
     data:function(){
       return{
-        Detail:[],
+        Detail:{},
         imgurl:"",
         reson:[],
         isShow:false,
@@ -268,19 +268,13 @@
         },
       })
 
-      var params = new URLSearchParams();
-      params.append('goods_id', this.$route.query[0]);
-      this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selDetail',params)
-        .then((res) => {
-          this.Detail= res.data[0];
-          this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
-          this.reson = this.Detail.recommended_reasons.split(";");
-          console.log(this.Detail)
-        }).catch((err) => {
-        console.log(err)
-      })
-      console.log(this.$route.query)
-
+      if(this.$route.query.type=='vvip'){
+        this.Detail = this.$route.query.datas;
+        this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
+      }else if(this.$route.query.type=='list'){
+        this.Detail = this.$route.query.listDatas;
+        this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
+      }
     },
     methods:{
       xingCheng(){
