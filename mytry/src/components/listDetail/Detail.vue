@@ -1,6 +1,5 @@
 <template>
     <div class="box">
-
       <div class="swiper-container">
         <router-view></router-view>
         <router-link :to="{path:'/pages'}">
@@ -243,6 +242,11 @@
   import Swiper from 'swiper';
   export default {
     name: "Detail",
+    data:function(){
+      return{
+        Detail:[]
+      }
+    },
     mounted(){
       new Swiper ('.swiper-container', {
         loop: true,
@@ -252,6 +256,15 @@
           el: '.swiper-pagination',
         },
       })
+
+      this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selDetail')
+        .then((res) => {
+          this.Searchs= res.data;
+          console.log(this.Searchs)
+        }).catch((err) => {
+        console.log(err)
+      })
+
     },
     methods:{
       xingCheng(){
