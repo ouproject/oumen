@@ -1,12 +1,12 @@
 <template>
     <div class="box">
       <div class="swiper-container">
-        <router-view></router-view>
-        <router-link :to="{path:'/pages'}">
-          <div class="back">
+        <!--<router-view></router-view>-->
+        <!--<router-link :to="{path:'/pages'}">-->
+          <div class="back" @click="goBack">
             <img src="../../assets/img/back.png" />
           </div>
-        </router-link>
+        <!--</router-link>-->
           <div class="enshrine">
             <img src="../../assets/img/enshrine.png" />
           </div>
@@ -271,10 +271,15 @@
       if(this.$route.query.type=='vvip'){
         this.Detail = this.$route.query.datas;
         this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
+        this.reson = this.Detail.recommended_reasons.split(";");
       }else if(this.$route.query.type=='list'){
         this.Detail = this.$route.query.listDatas;
         this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
+        console.log("d-------",this.Detail)
+         this.reson = this.Detail.recommended_reasons.split(";");
       }
+
+      //console.log("tour_type------",this.$route.query.tour_type);
     },
     methods:{
       xingCheng(){
@@ -290,6 +295,19 @@
           path: '/time'
 
         })
+      },
+      goBack(){
+        if(this.$route.query.type=='vvip'){
+            this.$router.push({
+              path: '/pages'
+
+            })
+        }else if(this.$route.query.type=='list'){
+          this.$router.push({
+            path: '/list',
+            query:{tour_type:this.$route.query.tour_type}
+          })
+        }
       }
     }
   }
