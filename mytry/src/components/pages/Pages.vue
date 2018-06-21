@@ -66,7 +66,7 @@
         <span class="navitem2">精选亲子出行路线</span>
       </div>
       <div class="pageslots">
-        <div class="pagelot">
+        <div @click="Detail" class="pagelot">
             <div class="pagelot1">
               <img src="../../assets/img/lot1.jpg">
               <span class="lothui">超值特惠</span>
@@ -139,6 +139,12 @@
             query: {
               selwords:this.currentValue
             }
+
+          })
+        },
+        Detail(){
+          this.$router.push({
+            path: '/detail'
 
           })
         }

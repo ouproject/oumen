@@ -1,7 +1,7 @@
 <template>
     <div>
       <mt-header title="填写信息" class="usersheader">
-        <router-link to="/pages" slot="left">
+        <router-link to="/detail" slot="left">
           <mt-button icon="back"></mt-button>
         </router-link>
       </mt-header>
