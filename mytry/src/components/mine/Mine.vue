@@ -99,12 +99,12 @@
           //点击查看订单--判断是否是登陆状态
           selOrder(){
             console.log("000000");
-            this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder')
-              .then((res) => {
-                console.log(res.data);
-              }).catch((err) => {
-              console.log(err)
-            })
+            // this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder')
+            //   .then((res) => {
+            //     console.log(res.data);
+            //   }).catch((err) => {
+            //   console.log(err)
+            // })
           }
         }
     }
