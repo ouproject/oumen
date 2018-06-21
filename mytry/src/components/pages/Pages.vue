@@ -68,7 +68,7 @@
       <div class="pageslots">
         <div v-for="(v,k) in vvipData" @click="Detail(k)" class="pagelot" >
             <div class="pagelot1">
-              <img src="../../assets/img/lot1.jpg">
+              <img :src="'http://10.80.7.125/MyRead/'+v.img_addr">
               <span class="lothui">超值特惠</span>
               <span class="lotwin">冬令营</span>
               <span class="lotbo">育</span>
