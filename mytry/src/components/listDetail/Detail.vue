@@ -16,22 +16,27 @@
           <div class="tag">超值特惠</div>
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src="../../assets/img/Detail-swiper.jpg">
+            <!--<img style="width: 750px;height: 500px" src="../../assets/img/shou1.jpg">-->
+            <!--<div :style="{width: '750px',height: '500px',background: 'url(http://10.80.7.125/MyRead/+Detail.img_addr)'}"></div>-->
+            <div :style="{width: '750px',height: '500px',background: 'url('+imgurl+')'}"></div>
           </div>
           <div class="swiper-slide">
-            <img src="../../assets/img/Detail-swiper.jpg">
+            <!--<img :src="'http://10.80.7.125/MyRead/'+Detail.img_addr">-->
+            <!--<div :style="{width: '750px',height: '500px',background: 'url(http://10.80.7.125/MyRead/+Detail.img_addr)'}"></div>-->
+            <div :style="{width: '750px',height: '500px',background: 'url('+imgurl+')'}"></div>
           </div>
           <div class="swiper-slide">
-            <img src="../../assets/img/Detail-swiper.jpg">
+            <!--<img :src="'http://10.80.7.125/MyRead/'+Detail.img_addr">-->
+            <div :style="{width: '750px',height: '500px',background: 'url('+imgurl+')'}"></div>
           </div>
         </div>
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>
       </div>
       <div class="information">
-        <h2>首尔五天半自助游大韩</h2>
+        <h2>{{Detail.title}}</h2>
         <span class="h_right">偶们自营</span>
-        <p>航空北京直飞，3晚首尔市区乐天酒店，赠送韩国著名表演秀</p>
+        <p>{{Detail.detail}}</p>
         <p>适合年龄：
           <span class="radius">8</span>
           <span class="radius">9</span>
@@ -39,12 +44,12 @@
           <span class="radius">11</span>
           <span class="radius">12</span>
         </p>
-        <h3>￥ 10880</h3>
+        <h3>￥ {{Detail.new_price}}</h3>
         <p class="h_p">起/人</p>
-        <p>预付款：￥3000/人</p>
+        <p>预付款：￥{{Detail.advance}}/人</p>
         <span class="accessing">
           <img src="../../assets/img/eyes.png" />
-          3456
+          {{Detail.follow_num}}
         </span>
       </div>
 
@@ -83,10 +88,11 @@
 
       <div class="recommend">
         <h2>推荐理由</h2>
-        <ul>
-          <li>1、 韩式五星级酒店，乐天马浦酒店住宿</li>
-          <li>2、 大韩航空，直飞不奔波，出行更便利</li>
-          <li>3、 韩国旅游发展局提供的精彩绝伦的表演秀（根据当地演出时间安排乱打秀或涂鸦秀）</li>
+        <ul v-for="(v,k) in reson">
+          <li>{{k+1}}、{{v}}</li>
+          <!--<li>1、 韩式五星级酒店，乐天马浦酒店住宿</li>-->
+          <!--<li>2、 大韩航空，直飞不奔波，出行更便利</li>-->
+          <!--<li>3、 韩国旅游发展局提供的精彩绝伦的表演秀（根据当地演出时间安排乱打秀或涂鸦秀）</li>-->
         </ul>
       </div>
 
@@ -95,12 +101,12 @@
           <li>
             <img src="../../assets/img/chuxing.png" />
             <span>出行人数</span>
-            <p>5组成团/已报名3组</p>
+            <p>{{Detail.limit_num}}组成团/已报名{{Detail.actual_num}}组</p>
           </li>
           <li>
             <img src="../../assets/img/tuanqi.png" />
             <span>最近团期</span>
-            <p>2015-12-24</p>
+            <p>{{Detail.starttime}}</p>
           </li>
         </ul>
       </div>
@@ -244,7 +250,9 @@
     name: "Detail",
     data:function(){
       return{
-        Detail:[]
+        Detail:[],
+        imgurl:"",
+        reson:[]
       }
     },
     mounted(){
@@ -261,7 +269,9 @@
       params.append('goods_id', this.$route.query[0]);
       this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selDetail',params)
         .then((res) => {
-          this.Detail= res.data;
+          this.Detail= res.data[0];
+          this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
+          this.reson = this.Detail.recommended_reasons.split(";");
           console.log(this.Detail)
         }).catch((err) => {
         console.log(err)
@@ -417,7 +427,7 @@
     height: 40px;
     color: red;
     line-height: 40px;
-    border: 1px solid red;
+    border: 2px solid red;
     border-radius: 20px;
   }
   .information p{
