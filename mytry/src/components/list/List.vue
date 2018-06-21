@@ -1,14 +1,21 @@
 <template>
     <div style="overflow: auto;">
-      <mt-header :title=tour_type class="usersheader">
+      <mt-header :title=tour_type class="usersheader" v-show="disTop">
+        <router-link to="/pages" slot="left" >
+          <mt-button icon="back"></mt-button>
+        </router-link>
+      </mt-header>
+
+      <mt-header title="搜索结果" class="usersheader" v-show="!disTop">
         <router-link to="/pages" slot="left">
           <mt-button icon="back"></mt-button>
         </router-link>
       </mt-header>
-      <ul class="orderBox">
+
+      <ul class="orderBox" v-show="disTop">
         <li class="orderItem order01" >
           <div class="orderContent">
-            <span @click="addclass1(0)" :class="activeJudge1[0]?'order_active':''">综合排序</span>
+            <span @click="addclass1(0)" :class="activeJudge1[0]?'order_active':''"  ref="order1_content">综合排序</span>
             <i :class="activeJudge1[0]?'icon-down order_active':'icon-down'" style="font-size: 30px"></i>
           </div>
           <ul :class="disJudge?'order01_01 dis':'order01_01'" >
@@ -88,30 +95,86 @@
           activeJudge:[true,false,false,false],
           activeJudge1:[true,false,false],
           disJudge:true,
-          listData:[]
+          listData:[],
+          disTop:true
         }
       },
       mounted:function () {
-          this.tour_type = this.$route.query.tour_type;
-          //发送请求 返回数据
-          var params = new URLSearchParams();
-          params.append('tour_name', this.tour_type);
-          console.log("tour_name------",this.tour_type);
+          //根据分类发送请求 返回数据
+          if(this.$route.query.tour_type != undefined){
+            this.tour_type = this.$route.query.tour_type;
 
-          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=seltourType',params)
-            .then((res) => {
-              this.listData= res.data;
-              console.log("listdata--------",this.listData);
-            }).catch((err) => {
-            console.log(err)
-          })
+            var params = new URLSearchParams();
+            params.append('tour_name', this.tour_type);
+            console.log("tour_name------",this.tour_type);
+            this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=seltourType',params)
+              .then((res) => {
+                this.listData= res.data;
+                console.log("listdata--------",this.listData);
+              }).catch((err) => {
+              console.log(err)
+            })
+          }
+
+          //根据搜索
+          if(this.$route.query.selwords != undefined){
+            console.log("00000000000000");
+            this.disTop = false;
+            var keyword = this.$route.query.selwords;
+            this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=mistsSel&selwords='+keyword)
+              .then((res) => {
+                this.listData= res.data;
+                console.log(this.listData)
+              }).catch((err) => {
+              console.log(err)
+            })
+          }
+
       },
       methods:{
           //一级条件下面的二级条件
           addclass(index){
+            var orderKey = '';
+            var orderType = '';
+
             for(var i =0; i < this.activeJudge.length; i++){
                 if(i==index){
                   Vue.set(this.activeJudge, i, true);
+                  //隐藏条件
+                  this.disJudge = !this.disJudge;
+
+                  //发送请求；根据排序条件刷新数据
+                  if(i==1){
+                    //按价格 从高到低 desc
+                    orderKey = 'new_price';
+                    orderType = 'desc';
+                  }else if(i==2){
+                    //按价格 从低到高 desc
+                    orderKey = 'new_price';
+                    orderType = 'asc';
+                  }else if(i==3){
+                    //按出发时间 starttime:'2018-06-01',endtime:'2018-06-30'
+                    orderKey = 'starttime';
+                    orderType = 'asc';
+                  }else if(i==0){
+                    //综合排序
+                    orderKey = '';
+                    orderType = '';
+                  }
+
+                  var params = new URLSearchParams();
+                  params.append('orderKey', orderKey);
+                  params.append('orderType', orderType);
+                  params.append('tour_name', this.tour_type);
+
+                  this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=seltourType',params)
+                    .then((res) => {
+                      this.listData= res.data;
+                      //console.log("listdata--------",this.listData);
+                    }).catch((err) => {
+                    console.log(err)
+                  })
+
                 }else{
                   Vue.set(this.activeJudge, i, false);
                 }
@@ -158,10 +221,8 @@
   }
   .orderBox{
     display: flex;
-    /*justify-content: space-around;*/
     align-items: center;
     border-top: 1px solid #ccc;
-
   }
   .orderItem{
     height: 70px;
@@ -175,7 +236,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /*margin-top: 10px;*/
     padding: 5px;
     border-right: 1px solid #ccc;
   }
@@ -183,7 +243,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /*margin-top: 10px;*/
     padding: 5px;
   }
   .orderIcon{
@@ -194,6 +253,8 @@
     position: absolute;
     top:80px;
     left: 20px;
+    z-index: 99;
+    background-color: white;
   }
   .order01_01>li{
     height: 70px;
@@ -217,7 +278,6 @@
     border-radius: 8px;
     margin-top: 18px;
     overflow: hidden;
-    /*border: 2px solid #e6e6e6;*/
     margin-bottom: 80px;
 
   }

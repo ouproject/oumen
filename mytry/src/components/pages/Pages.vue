@@ -137,7 +137,7 @@
       methods: {
         Searchs() {
           this.$router.push({
-            path: '/searchlist',
+            path: '/list',
             query: {
               selwords:this.currentValue
             }
