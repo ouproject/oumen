@@ -66,14 +66,14 @@
         <span class="navitem2">精选亲子出行路线</span>
       </div>
       <div class="pageslots">
-        <div @click="Detail" class="pagelot">
+        <div @click="Detail" class="pagelot" v-for="(v,k) in vvipData">
             <div class="pagelot1">
               <img src="../../assets/img/lot1.jpg">
               <span class="lothui">超值特惠</span>
               <span class="lotwin">冬令营</span>
               <span class="lotbo">育</span>
             </div>
-          <p class="titlelot">香港+澳门4晚5日经典观光游4晚5日经典4晚5日经典4晚5日经典</p>
+          <p class="titlelot">{{v.title}}</p>
           <p class="agelots">
             <span class="agelot">适合的年龄：</span>
             <span class="numslot">8</span><span class="numslot">9</span>
@@ -81,43 +81,21 @@
             <span class="numslot">12</span>
           </p>
           <p>
-            <span>￥23345起/人</span><span class="prcienum">市场价：￥50000</span>
+            <span>￥{{v.new_price}}起/人</span><span class="prcienum">市场价：￥{{v.old_price}}</span>
           </p>
           <p class="wacthimg">
-            <img src="../../assets/img/browse.png">
+            <img :src="'http://10.80.7.125/MyRead/'+v.img_addr">
             3456
           </p>
-          <p class="complimentary">
+          <p class="complimentary" >
             <span class="complimentary1">偶们自营</span>
-            <span class="complimentary2">随性赠送礼品：高档亲子装、高档雨衣、高档书包等性赠送礼品：高档亲子装、高档雨衣</span>
+            <span class="complimentary2" >
+              <span>随性赠送礼品：</span>
+              <span v-for="(val,key) in v.gift.split(';')">{{val}}、</span>
+            </span>
           </p>
         </div>
-        <div class="pagelot">
-          <div class="pagelot1">
-            <img src="../../assets/img/lot1.jpg">
-            <span class="lothui">超值特惠</span>
-            <span class="lotwin">冬令营</span>
-            <span class="lotbo">育</span>
-          </div>
-          <p class="titlelot">香港+澳门4晚5日经典观光游4晚5日经典4晚5日经典4晚5日经典</p>
-          <p class="agelots">
-            <span class="agelot">适合的年龄：</span>
-            <span class="numslot">8</span><span class="numslot">9</span>
-            <span class="numslot">10</span><span class="numslot">11</span>
-            <span class="numslot">12</span>
-          </p>
-          <p>
-            <span>￥23345起/人</span><span class="prcienum">市场价：￥50000</span>
-          </p>
-          <p class="wacthimg">
-            <img src="../../assets/img/browse.png">
-            3456
-          </p>
-          <p class="complimentary">
-            <span class="complimentary1">偶们自营</span>
-            <span class="complimentary2">随性赠送礼品：高档亲子装、高档雨衣、高档书包等性赠送礼品：高档亲子装、高档雨衣</span>
-          </p>
-        </div>
+
       </div>
     </div>
   </div>
@@ -131,7 +109,9 @@
       name: "Pages",
       data: function () {
         return {
-          currentValue:this.value
+          currentValue:this.value,
+          vvipData:[],
+          giftArr:[]
         }
       },
       methods: {
@@ -146,8 +126,8 @@
         },
         Detail(){
           this.$router.push({
-            path: '/detail'
-
+            path: '/detail',
+            query:'vvip'
           })
         }
       },
@@ -159,6 +139,15 @@
           pagination: {
             el: '.swiper-pagination',
           },
+        })
+
+        //发送请求--返回旅游线路数据
+        this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selvip')
+          .then((res) => {
+            this.vvipData= res.data;
+            //console.log("vvipData-------",this.vvipData);
+          }).catch((err) => {
+          console.log(err)
         })
       }
     }
