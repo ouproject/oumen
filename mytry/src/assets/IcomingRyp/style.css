@@ -26,7 +26,7 @@
 
 .icon-down:before {
   content: "\e900";
-  color: #1296db;
+  /*color: #1296db;*/
 }
 .icon-duihao:before {
   content: "\e903";
