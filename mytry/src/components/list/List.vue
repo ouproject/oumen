@@ -51,7 +51,7 @@
         </li>
       </ul>
       <!--列表内容-->
-      <div class="pagelot" v-for="(v,k) in listData" @click="goDetail(v.goods_id)">
+      <div class="pagelot" v-for="(v,k) in listData" @click="goDetail(k)">
         <div class="pagelot1">
           <img :src="'http://10.80.7.125/MyRead/'+v.img_addr">
           <span class="lothui">冬令营
@@ -197,10 +197,10 @@
           }
         },
         //跳转到详情页
-        goDetail(id){
+        goDetail(index){
           this.$router.push({
             path: '/detail',
-            query:id
+            query:{type:'list',listDatas:this.listData[index]}
           })
         }
       }
