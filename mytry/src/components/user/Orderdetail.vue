@@ -19,15 +19,15 @@
       </div>
       <div>
         <div class="heta1">
-          <img class="detailimg" src="../../assets/img/lot1.jpg">
-          <p class="hetap1">香港+澳门4晚5日经典观光游4晚5日经典4晚5日经典4晚5日经典</p>
+          <img class="detailimg" :src="'http://10.80.7.125/MyRead/'+$store.state.goodsData.sendDatas.img_addr">
+          <p class="hetap1">{{$store.state.goodsData.sendDatas.title}}</p>
         </div>
         <div class="timedetail">
-          <span class="timepan1">10月20日</span>
+          <span class="timepan1">{{$store.state.goodsData.sendDatas.starttime}}</span>
           <span class="timepan2"></span>
-          <span class="timepan3">2个成人 1个儿童</span>
-          <span class="timepan4">历时5天</span>
-          <span class="timepan5">10月25日</span>
+          <span class="timepan3">{{$store.state.orderPay.num}}个成人 {{$store.state.orderPay.nummber}}个儿童</span>
+          <span class="timepan4">历时{{days}}天</span>
+          <span class="timepan5">{{$store.state.goodsData.sendDatas.endtime}}</span>
         </div>
         <div class="places">
           <p class="placesp1">
@@ -42,7 +42,7 @@
         <div>
           <div class="clnum">
             <p class="clnum1">实发金额：</p>
-            <p class="clnum2">￥253880</p>
+            <p class="clnum2">￥{{this.pricesall}}</p>
           </div>
         </div>
       </div>
@@ -52,16 +52,16 @@
       <div>
         <div class="orderuser">
           <p class="orderuser1">联系人：</p>
-          <p class="orderuser2">你好呀</p>
+          <p class="orderuser2">{{$store.state.familys.personum}}</p>
         </div>
         <div class="orderuser">
           <p class="orderuser1">电话：</p>
-          <p class="orderuser3">18956595673</p>
+          <p class="orderuser3">{{$store.state.familys.phonenum}}</p>
         </div>
       </div>
       <div class="orderfoot">
         <div class="orderfoot1">取消订单</div>
-        <div class="orderfoot2">立即支付</div>
+        <div class="orderfoot2" @click="payall">预支付款</div>
       </div>
     </div>
   </div>
@@ -70,7 +70,43 @@
 
 <script>
     export default {
-        name: "Orderdetail"
+        name: "Orderdetail",
+      data:function () {
+        return{
+          pricesall:Number(this.$store.state.orderPay.prices) + Number(this.$store.state.orderPay.prices1),
+
+        }
+      },
+      methods:{
+        payall(){
+          var params = new URLSearchParams();
+          params.append('money', this.pricesall);
+          params.append('user_name',this.$store.state.familys.personum);
+          params.append('user_tel', this.$store.state.familys.phonenum);
+          params.append('goods_id', this.$store.state.goodsData.sendDatas.goods_id);
+          params.append('state', '已完成');
+          // params.append('persons5', this.persons5);
+          // params.append('persons6', this.persons6);
+          console.log(this.pricesall)
+          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder',params)
+            .then((res) => {
+              console.log(res)
+            }).catch((err) => {
+            console.log(err)
+          })
+        }
+      },
+      computed:{
+        days(){
+          var starday = this.$store.state.goodsData.sendDatas.starttime.split("-");
+          var endday = this.$store.state.goodsData.sendDatas.endtime.split("-");
+          var dayall = new Date(starday[0],starday[1],starday[2]);
+          var dayall1 = new Date(endday[0],endday[1],endday[2]);
+          var daysAll = (dayall1 - dayall)/(24*60*60*1000);
+          return daysAll;
+        },
+
+      }
     }
 </script>
 
@@ -147,7 +183,7 @@
   .timedetail{
     position: relative;
     margin-top: 50px;
-    margin-left: 60px;
+    /*margin-left: 60px;*/
   }
   .timepan1{
     font-size: 34px;
@@ -161,12 +197,12 @@
   }
   .timepan3{
     position: absolute;
-    left: 180px;
+    left: 240px;
     top:-12px;
   }
   .timepan4{
     position: absolute;
-    left: 220px;
+    left: 260px;
     top:35px;
   }
   .timepan5{

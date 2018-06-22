@@ -7,7 +7,9 @@ export default new Vuex.Store({
   state:{
     //把变量放到公共参数里面  是一个全局的,在任何一个组件里都可以使用   使用的时候方法是：{{$store.state.count}}
     loginTel:"",
-    goodsData:{}
+    goodsData:{},
+    orderPay:{},
+    familys:{}
   },
   //用getters方式获取数据
 
@@ -15,6 +17,13 @@ export default new Vuex.Store({
     loginState(state,str){//这里的state对应着上面这个state
       this.state.loginTel = str;
 
+    },
+    orderPrice(state,price){
+      this.state.orderPay = price;
+    },
+    faMily(state,family){
+      this.state.familys = family;
+      // console.log("family-------",this.state.familys)
     }
   },
   actions:{

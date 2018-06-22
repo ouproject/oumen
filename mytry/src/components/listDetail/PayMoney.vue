@@ -8,15 +8,15 @@
 
     <div class="htop">
       <div class="heta1">
-        <img class="detailimg" src="../../assets/img/lot1.jpg">
-        <p class="hetap1">香港+澳门4晚5日经典观光游4晚5日经典4晚5日经典4晚5日经典</p>
+        <img class="detailimg" :src="'http://10.80.7.125/MyRead/'+$store.state.goodsData.sendDatas.img_addr">
+        <p class="hetap1">{{$store.state.goodsData.sendDatas.title}}</p>
       </div>
       <div class="timedetail">
-        <span class="timepan1">10月20日</span>
+        <span class="timepan1">{{$store.state.goodsData.sendDatas.starttime}}</span>
         <span class="timepan2"></span>
-        <span class="timepan3">2成人 1儿童</span>
-        <span class="timepan4">历时5天</span>
-        <span class="timepan5">10月25日</span>
+        <span class="timepan3">{{$store.state.orderPay.num}}成人 {{$store.state.orderPay.nummber}}儿童</span>
+        <span class="timepan4">历时{{days}}天</span>
+        <span class="timepan5">{{$store.state.goodsData.sendDatas.endtime}}</span>
       </div>
       <ul class="hbot">
         <li>
@@ -29,11 +29,11 @@
         </li>
         <li>
           <div class="zonge">合计：</div>
-          <div class="zongenum">￥666666</div>
+          <div class="zongenum">￥{{pricesall}}</div>
         </li>
         <li>
           <div class="zonge">实付金额：</div>
-          <div class="zongenum">￥666666</div>
+          <div class="zongenum">￥{{pricesall}}</div>
         </li>
       </ul>
       <h4>选择支付方式</h4>
@@ -42,12 +42,12 @@
           <li>
             <img src="../../assets/img/weixin.png" />
             <span>微信支付</span>
-            <input type="checkbox"/>
+            <input type="checkbox" />
           </li>
           <li>
             <img src="../../assets/img/zhifubao.png" />
             <span>支付宝</span>
-            <input type="checkbox"/>
+            <input type="checkbox" />
           </li>
         </ul>
       </div>
@@ -64,11 +64,33 @@
 <script>
     export default {
         name: "PayMoney",
+      data:function(){
+          return{
+            pricesall:Number(this.$store.state.orderPay.prices) + Number(this.$store.state.orderPay.prices1)
+          }
+      },
       methods:{
         paymoney(){
-          if(this.$store.state.loginTel != ''){
-
+          if(this.$store.state.loginTel == ''){
+            this.$router.push({
+              path: '/login',
+            });
+          }else{
+            this.$router.push({
+              path: '/orderdetail',
+            });
           }
+        },
+
+      },
+      computed:{
+        days(){
+          var starday = this.$store.state.goodsData.sendDatas.starttime.split("-");
+          var endday = this.$store.state.goodsData.sendDatas.endtime.split("-");
+          var dayall = new Date(starday[0],starday[1],starday[2]);
+          var dayall1 = new Date(endday[0],endday[1],endday[2]);
+          var daysAll = (dayall1 - dayall)/(24*60*60*1000);
+          return daysAll;
         }
       }
     }
@@ -125,7 +147,7 @@
   .timedetail{
     position: relative;
     margin-top: 50px;
-    margin-left: 80px;
+    /*margin-left: 80px;*/
   }
   .timepan1{
     font-size: 34px;

@@ -8,37 +8,37 @@
 
     <div class="htop">
       <div class="heta1">
-        <img class="detailimg" src="../../assets/img/lot1.jpg">
-        <p class="hetap1">香港+澳门4晚5日经典观光游4晚5日经典4晚5日经典4晚5日经典</p>
+        <img class="detailimg" :src="'http://10.80.7.125/MyRead/'+$store.state.goodsData.sendDatas.img_addr">
+        <p class="hetap1">{{$store.state.goodsData.sendDatas.title}}</p>
       </div>
       <div class="timedetail">
-        <span class="timepan1">10月20日</span>
+        <span class="timepan1">{{$store.state.goodsData.sendDatas.starttime}}</span>
         <span class="timepan2"></span>
-        <span class="timepan3">2成人 1儿童</span>
-        <span class="timepan4">历时5天</span>
-        <span class="timepan5">10月25日</span>
+        <span class="timepan3">{{$store.state.orderPay.num}}成人 {{$store.state.orderPay.nummber}}儿童</span>
+        <span class="timepan4">历时{{days}}天</span>
+        <span class="timepan5">{{$store.state.goodsData.sendDatas.endtime}}</span>
       </div>
-      <div class="zonge">订单总额：</div><div class="zongenum">￥666666</div>
+      <div class="zonge">订单总额：</div><div class="zongenum">￥{{this.pricesall}}</div>
     </div>
     <h4>联系人信息</h4>
     <div class="xinxi">
       <ul>
         <li>
           <span>联系人：</span>
-          <input type="text" placeholder="填写联系人" />
+          <input v-model="personum" type="text" placeholder="填写联系人" />
         </li>
         <li>
           <span>联系电话：</span>
-          <input type="text" placeholder="填写常用手机号" />
+          <input v-model="phonenum" type="text" placeholder="填写常用手机号" />
         </li>
         <li>
           <span>电子邮箱：</span>
-          <input type="text" placeholder="(选填)" />
+          <input v-model="emails" type="text" placeholder="(选填)" />
         </li>
       </ul>
     </div>
     <h4>旅客信息：</h4>
-    <p>1成人 1儿童</p>
+    <p>{{$store.state.orderPay.num}}成人 {{$store.state.orderPay.nummber}}儿童</p>
     <div class="lvke">
       <ul>
         <li>
@@ -69,7 +69,7 @@
         </li>
         <li>
           <span>实付款：</span>
-          <p>￥666666</p>
+          <p>￥{{this.pricesall}}</p>
         </li>
       </ul>
     </div>
@@ -80,7 +80,7 @@
     </h4>
     <div class="bott">
       <span>预付款：</span>
-      <p>￥6666</p>
+      <p>￥{{sellder}}</p>
       <h6 @click="pays">提交订单</h6>
     </div>
     <div class="big"></div>
@@ -92,7 +92,30 @@
     name: "WirteInfo",
     data () {
       return {
+        personum:'',
+        phonenum:'',
+        emails:'',
 
+        pricesall:Number(this.$store.state.orderPay.prices) + Number(this.$store.state.orderPay.prices1)
+      }
+
+    },
+    computed:{
+      days(){
+        var starday = this.$store.state.goodsData.sendDatas.starttime.split("-");
+        var endday = this.$store.state.goodsData.sendDatas.endtime.split("-");
+        var dayall = new Date(starday[0],starday[1],starday[2]);
+        var dayall1 = new Date(endday[0],endday[1],endday[2]);
+        var daysAll = (dayall1 - dayall)/(24*60*60*1000);
+        return daysAll;
+      },
+      sellder(){
+        var person1 = this.$store.state.orderPay.num;
+        var person2 = this.$store.state.orderPay.nummber;
+        // console.log(person1+person2)
+        var sellders = (person1 + person2) * Number(this.$store.state.goodsData.sendDatas.advance);
+        // console.log(this.$store.state.goodsData.sendDatas.advance)
+        return sellders;
       }
     },
     methods: {
@@ -100,6 +123,13 @@
         this.$router.push({
           path: '/pay'
         })
+        var obj = {
+          personum:this.personum,
+          phonenum:this.phonenum,
+          emails:this.emails,
+        }
+        this.$store.commit("faMily",obj)
+        console.log("goods666666666666666-----",this.$store.state.familys)
       }
     }
   }
@@ -189,7 +219,7 @@
   .timedetail{
     position: relative;
     margin-top: 50px;
-    margin-left: 80px;
+    /*margin-left: 80px;*/
   }
   .timepan1{
     font-size: 34px;
