@@ -20,6 +20,7 @@ import Login from '@/components/register/Login'
 import List from '@/components/list/List'
 import WirteInfo from '@/components/listDetail/WirteInfo'
 import Detail from '@/components/listDetail/Detail'
+import PayMoney from '@/components/listDetail/PayMoney'
 
 Vue.use(Router)
 
@@ -95,6 +96,11 @@ export default new Router({
     {
       path:'/detail',
       component:Detail
+
+    },
+    {
+      path:'/pay',
+      component:PayMoney
 
     }
 

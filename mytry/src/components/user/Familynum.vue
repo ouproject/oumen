@@ -77,13 +77,12 @@
             persons5:'',
             persons6:'',
           }
+
+
         }
 
       },
       mounted:function () {
-
-        // this.obj.name=this.persons;
-        // console.log(obj);
 
 
       },
@@ -95,24 +94,35 @@
           // let formData = new FormData();
           // FormData.append('persons',this.texts)
 
-          // var reg_form = document.getElementById("familynums");
-          // var formdata = new FormData(reg_form);
+          var reg_form = document.getElementById("familynums");
+          var formdata = new FormData(reg_form);
+          // formdata.append("test","112121");
           //   console.log(formdata);
-          let config = {
 
-            'Content-Type': 'multipart/form-data'
+          let config = {
+            'Content-Type': "multipart/form-data",
+            'contentType': false,//必须
+            'processData': false,//必须
+
           };
           //
           //
-          var params = new URLSearchParams();
-          params.append('persons', 123);
+          // var params = new URLSearchParams();
+          // params.append('persons', this.persons);
+          // params.append('persons1', this.persons1);
+          // params.append('persons2', this.persons2);
+          // params.append('persons3', this.persons3);
+          // params.append('persons4', this.persons4);
+          // params.append('persons5', this.persons5);
+          // params.append('persons6', this.persons6);
           // console.log(formdata);
+
 
           // params.append('orderType', orderType);
           // params.append('tour_name', this.tour_type);
 
-          // console.log(this.obj);
-          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=add_family_info',params,config)
+          console.log(this.obj);
+          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=add_family_info',formdata,config)
             .then((res) => {
               console.log(res)
             }).catch((err) => {

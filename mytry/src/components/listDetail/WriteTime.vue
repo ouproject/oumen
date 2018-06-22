@@ -95,7 +95,7 @@
             </p>
           </div>
           <div class="infowrite">
-            <span class="infowrite1">填写信息</span>
+            <span class="infowrite1" @click="inFos">填写信息</span>
           </div>
         </div>
       </div>
@@ -129,6 +129,11 @@
         this.initData(null);
       },
       methods: {
+        inFos(){
+          this.$router.push({
+            path: '/wirteInfo'
+          })
+        },
         delnum1(){
           this.prices =36700;
           if(this.num>0){
