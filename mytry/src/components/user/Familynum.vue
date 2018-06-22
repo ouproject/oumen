@@ -1,64 +1,125 @@
 <template>
     <div>
+
       <mt-header title="家人信息" class="usersheader">
         <router-link to="/family" slot="left">
           <mt-button icon="back"></mt-button>
         </router-link>
       </mt-header>
       <div class="mineline"></div>
-      <div >
-        <div class="familyfrist">
-          <p class="familyfrist1">我的家人</p>
-          <select class="familyfrist2">
-            <option>儿童</option>
-            <option>成人</option>
-          </select>
+      <form id="familynums" name="familynums" >
+        <div>
+          <div class="familyfrist">
+            <p class="familyfrist1">我的家人</p>
+            <select v-model="obj.persons" class="familyfrist2">
+              <option>儿童</option>
+              <option>成人</option>
+            </select>
+          </div>
+          <div class="familyfrist">
+            <p class="familyfrist1">姓名</p>
+            <input v-model="obj.persons1" class="familyfrist2 familyp" />
+          </div>
+          <div class="familyfrist">
+            <p class="familyfrist1">性别</p>
+            <select v-model="obj.persons2" class="familyfrist2">
+              <option>男</option>
+              <option>女</option>
+            </select>
+          </div>
+          <div class="familyfrist">
+            <p class="familyfrist1">出生日期</p>
+            <input v-model="obj.persons3" type="date" class="familyfrist2 familyp1" />
+          </div>
         </div>
-        <div class="familyfrist">
-          <p class="familyfrist1">姓名</p>
-          <input class="familyfrist2 familyp" />
+        <div class="mineline"></div>
+        <div>
+          <div class="familyfrist">
+            <p class="familyfrist1">证件类型</p>
+            <select v-model="obj.persons4" class="familyfrist2">
+              <option>护照</option>
+              <option>身份证</option>
+            </select>
+          </div>
+          <div class="familyfrist">
+            <p class="familyfrist1">证件号</p>
+            <input v-model="obj.persons5" class="familyfrist2 familyp2" />
+          </div>
+          <div class="familyfrist">
+            <p class="familyfrist1">手机号</p>
+            <input v-model="obj.persons6" placeholder="必填" class="familyfrist2 familyp2" />
+          </div>
         </div>
-        <div class="familyfrist">
-          <p class="familyfrist1">性别</p>
-          <select class="familyfrist2">
-            <option>男</option>
-            <option>女</option>
-          </select>
+        <div class="mineline"></div>
+        <div class="numbottom">
+          <div class="addnum" @click="addFanum">保存</div>
+          <div class="delnum">删除</div>
         </div>
-        <div class="familyfrist">
-          <p class="familyfrist1">出生日期</p>
-          <input type="date" class="familyfrist2 familyp1" />
-        </div>
-      </div>
-      <div class="mineline"></div>
-      <div>
-        <div class="familyfrist">
-          <p class="familyfrist1">证件类型</p>
-          <select class="familyfrist2">
-            <option>护照</option>
-            <option>身份证</option>
-          </select>
-        </div>
-        <div class="familyfrist">
-          <p class="familyfrist1">证件号</p>
-          <input class="familyfrist2 familyp2" />
-        </div>
-        <div class="familyfrist">
-          <p class="familyfrist1">手机号</p>
-          <input placeholder="必填" class="familyfrist2 familyp2" />
-        </div>
-      </div>
-      <div class="mineline"></div>
-      <div class="numbottom">
-        <div class="addnum">保存</div>
-        <div class="delnum">删除</div>
-      </div>
+      </form>
+      <!--<form >-->
+       <!--测试 <input type="text">-->
+      <!--</form>-->
     </div>
 </template>
 
 <script>
     export default {
-        name: "Familynum"
+        name: "Familynum",
+      data:function () {
+        return{
+          num:1,
+          obj:{
+            persons:'',
+            persons1:'',
+            persons2:'',
+            persons3:'',
+            persons4:'',
+            persons5:'',
+            persons6:'',
+          }
+        }
+
+      },
+      mounted:function () {
+
+        // this.obj.name=this.persons;
+        // console.log(obj);
+
+
+      },
+      methods:{
+        addFanum(){
+          //发送请求
+
+          // event.preventDefault();
+          // let formData = new FormData();
+          // FormData.append('persons',this.texts)
+
+          // var reg_form = document.getElementById("familynums");
+          // var formdata = new FormData(reg_form);
+          //   console.log(formdata);
+          let config = {
+
+            'Content-Type': 'multipart/form-data'
+          };
+          //
+          //
+          var params = new URLSearchParams();
+          params.append('persons', 123);
+          // console.log(formdata);
+
+          // params.append('orderType', orderType);
+          // params.append('tour_name', this.tour_type);
+
+          // console.log(this.obj);
+          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=add_family_info',params,config)
+            .then((res) => {
+              console.log(res)
+            }).catch((err) => {
+            console.log(err)
+          })
+        }
+      }
     }
 </script>
 
