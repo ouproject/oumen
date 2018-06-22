@@ -65,6 +65,9 @@
                   path: '/'
                 })
 
+                //将用户手机号存在cookie里面
+                //setCookie("user_tel", this.$refs.telVal.value, 0.005);
+
               }else if(res.data=='pwdFail'){
                 $(".erroPromt").html("密码错误").show();
               }
