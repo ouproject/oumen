@@ -132,6 +132,8 @@
         }
       },
       mounted(){
+
+        // console.log("cookie------",document.cookie['user_tel']);
         new Swiper('.swiper-container', {
           loop: true,
           autoplay: true,
