@@ -43,7 +43,7 @@
                 <span v-else>{{ dayobject.day.getDate() }}</span>
             </span>
             <!--显示剩余多少数量-->
-            <p v-if="leftobj[dayobject.index]">剩余：<span style="color: red" >{{dayobject.day.split('T')[0]}}</span></p>
+            <p v-if="leftobj[dayobject.index]">剩余：<span style="color: red" >{{leftobj[dayobject.index].count}}</span></p>
             <!---->
             <!--<button @click="order(dayobject)" v-if="leftobj[dayobject.index]">预定</button>-->
           </li>
