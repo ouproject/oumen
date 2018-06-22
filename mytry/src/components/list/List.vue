@@ -200,7 +200,7 @@
         goDetail(index){
           this.$router.push({
             path: '/detail',
-            query:{type:'list',listDatas:this.listData[index],tour_type:this.tour_type}
+            // query:{type:'list',listDatas:this.listData[index],tour_type:this.tour_type}
           })
           var datas = {type:'list',sendDatas:this.listData[index],tour_type:this.tour_type};
           this.$store.dispatch('getGoodsDatail',datas);

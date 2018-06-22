@@ -306,7 +306,7 @@
         }else if(this.$store.state.goodsData.type=='list'){
           this.$router.push({
             path: '/list',
-            query:{tour_type:this.$route.query.tour_type}
+            query:{tour_type:this.$store.state.goodsData.tour_type}
           })
         }
       },
