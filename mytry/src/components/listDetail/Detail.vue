@@ -278,18 +278,7 @@
         },
       })
 
-      // if(this.$route.query.type=='vvip'){
-      //   this.Detail = this.$route.query.datas;
-      //   this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
-      //   this.reson = this.Detail.recommended_reasons.split(";");
-      // }else if(this.$route.query.type=='list'){
-      //   this.Detail = this.$route.query.listDatas;
-      //   this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
-      //   //console.log("d-------",this.Detail)
-      //    this.reson = this.Detail.recommended_reasons.split(";");
-      // }
-
-      console.log("goods--------",this.$store.state.goodsData.type)
+      console.log("goods--------",this.$store.state.goodsData)
       this.Detail = this.$store.state.goodsData.sendDatas;
       this.reson = this.Detail.recommended_reasons.split(";");
       this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
@@ -317,7 +306,7 @@
         }else if(this.$store.state.goodsData.type=='list'){
           this.$router.push({
             path: '/list',
-            query:{tour_type:this.$route.query.tour_type}
+            query:{tour_type:this.$store.state.goodsData.tour_type}
           })
         }
       },

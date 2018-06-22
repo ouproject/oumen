@@ -35,17 +35,16 @@
             <!--本月-->
             <!--如果不是本月  改变类名加灰色-->
             <span v-if="dayobject.day.getMonth()+1 != currentMonth" class="other-month">{{ dayobject.day.getDate() }}</span>
-
             <!--如果是本月  还需要判断是不是这一天-->
             <span v-else>
           <!--今天  同年同月同日-->
                 <span v-if="dayobject.day.getFullYear() == new Date().getFullYear() && dayobject.day.getMonth() == new Date().getMonth() && dayobject.day.getDate() == new Date().getDate()" class="active">{{ dayobject.day.getDate() }}</span>
                 <span v-else>{{ dayobject.day.getDate() }}</span>
             </span>
-            <!--显示剩余多少数量-->
-            <p v-if="leftobj[dayobject.index]">剩余：<span style="color: red" >{{leftobj[dayobject.index].count}}</span></p>
-            <!---->
-            <!--<button @click="order(dayobject)" v-if="leftobj[dayobject.index]">预定</button>-->
+            <!--显示符合出发日期的线路 剩余多少数量-->
+            <p v-if="dayobject.day.getFullYear()==letdate[0]&&dayobject.day.getMonth()==letdate[1]&&dayobject.day.getDate()==letdate[2]">
+              剩余：<span style="color: red" >{{leftobj[0].count}}</span>
+            </p>
           </li>
         </ul>
       </div>
@@ -118,27 +117,23 @@
             days: [],
             leftobj:[    //存放剩余数量
               {count:1},
-
-            ]
-            // letdate:""
+            ],
+             letdate:[]
           }
         },
       created: function() {  //在vue初始化时调用
         this.initData(null);
       },
-      computed:{
-        // letdate(){
-        //   var str =
-        //   return dayobject.day.getFullYear() == new Date().getFullYear() && dayobject.day.getMonth() == new Date().getMonth() && dayobject.day.getDate() == new Date().getDate()
-        // }
-      },
+
       mounted:function(){
-          console.log(this.days)
         console.log("goods111111111-----",this.$store.state.goodsData.sendDatas);
         var num = Number(this.$store.state.goodsData.sendDatas.limit_num) - Number(this.$store.state.goodsData.sendDatas.actual_num);
-        console.log(num)
+
         this.leftobj[0].count = num;
-        // this.letdate = this.$store.state.goodsData.sendDatas.starttime;
+        this.letdate = this.$store.state.goodsData.sendDatas.starttime.split("-");
+        this.letdate[1] = this.letdate[1]-1;
+
+         console.log("day---------",this.letdate)
 
       },
       methods: {
