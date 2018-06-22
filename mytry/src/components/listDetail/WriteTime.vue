@@ -43,7 +43,7 @@
                 <span v-else>{{ dayobject.day.getDate() }}</span>
             </span>
             <!--显示剩余多少数量-->
-            <p v-if="leftobj[dayobject.index]">剩余：<span style="color: red" >{{leftobj[dayobject.index].count}}</span></p>
+            <p v-if="leftobj[dayobject.index]">剩余：<span style="color: red" >{{dayobject.day.split('T')[0]}}</span></p>
             <!---->
             <!--<button @click="order(dayobject)" v-if="leftobj[dayobject.index]">预定</button>-->
           </li>
@@ -118,15 +118,28 @@
             days: [],
             leftobj:[    //存放剩余数量
               {count:1},
-              {count:2},
-              {count:3},
-              {count:4},
-              {count:5},
+
             ]
+            // letdate:""
           }
         },
       created: function() {  //在vue初始化时调用
         this.initData(null);
+      },
+      computed:{
+        // letdate(){
+        //   var str =
+        //   return dayobject.day.getFullYear() == new Date().getFullYear() && dayobject.day.getMonth() == new Date().getMonth() && dayobject.day.getDate() == new Date().getDate()
+        // }
+      },
+      mounted:function(){
+          console.log(this.days)
+        console.log("goods111111111-----",this.$store.state.goodsData.sendDatas);
+        var num = Number(this.$store.state.goodsData.sendDatas.limit_num) - Number(this.$store.state.goodsData.sendDatas.actual_num);
+        console.log(num)
+        this.leftobj[0].count = num;
+        // this.letdate = this.$store.state.goodsData.sendDatas.starttime;
+
       },
       methods: {
         inFos(){

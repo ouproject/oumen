@@ -54,7 +54,7 @@
       <h3>温馨提示</h3>
       <h5>· 请在2小时内完成付款，逾期将取消订单</h5>
       <div class="quzhifu">
-        <p>去支付</p>
+        <p @click="paymoney">去支付</p>
       </div>
       <div class="big"></div>
     </div>
@@ -63,7 +63,14 @@
 
 <script>
     export default {
-        name: "PayMoney"
+        name: "PayMoney",
+      methods:{
+        paymoney(){
+          if(this.$store.state.loginTel != ''){
+
+          }
+        }
+      }
     }
 </script>
 
