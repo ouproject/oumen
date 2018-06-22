@@ -67,7 +67,7 @@
 
                 //将用户手机号 存在状态管理里面
                 this.$store.commit('loginState',this.$refs.telVal.value);
-                //console.log("=========",this.$store.state.loginTel)
+                // console.log("=========",this.$store.state.loginTel)
 
               }else if(res.data=='pwdFail'){
                 $(".erroPromt").html("密码错误").show();
