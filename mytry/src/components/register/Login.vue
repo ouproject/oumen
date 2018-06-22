@@ -63,10 +63,11 @@
                 $(".erroPromt").html("登陆成功").show();
                 this.$router.push({
                   path: '/'
-                })
+                });
 
-                //将用户手机号存在cookie里面
-                //setCookie("user_tel", this.$refs.telVal.value, 0.005);
+                //将用户手机号 存在状态管理里面
+                this.$store.commit('loginState',this.$refs.telVal.value);
+                //console.log("=========",this.$store.state.loginTel)
 
               }else if(res.data=='pwdFail'){
                 $(".erroPromt").html("密码错误").show();

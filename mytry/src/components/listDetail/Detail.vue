@@ -242,11 +242,19 @@
 
       <div class="big"></div>
 
+       <!--分享-->
+      <div class="bdsharebuttonbox shareBox" data-tag="share_1"  v-show="shareJudge">
+        <a class="bds_sqq share_item" data-cmd="sqq">&nbsp;QQ</a>
+        <a class="bds_tsina share_item" data-cmd="tsina" >&nbsp;微博</a>
+        <a class="bds_weixin share_item" data-cmd="weixin">&nbsp;微信</a>
+        <!--<a class="bds_more share_item" data-cmd="more">更多</a>-->
+      </div>
     </div>
 </template>
 
 <script>
   import Swiper from 'swiper';
+
   export default {
     name: "Detail",
     data:function(){
@@ -255,10 +263,12 @@
         imgurl:"",
         reson:[],
         isShow:false,
-        isShows:true
+        isShows:true,
+        shareJudge:false
       }
     },
     mounted(){
+      console.log(222);
       new Swiper ('.swiper-container', {
         loop: true,
         autoplay:true,
@@ -268,18 +278,21 @@
         },
       })
 
-      if(this.$route.query.type=='vvip'){
-        this.Detail = this.$route.query.datas;
-        this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
-        this.reson = this.Detail.recommended_reasons.split(";");
-      }else if(this.$route.query.type=='list'){
-        this.Detail = this.$route.query.listDatas;
-        this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
-        console.log("d-------",this.Detail)
-         this.reson = this.Detail.recommended_reasons.split(";");
-      }
+      // if(this.$route.query.type=='vvip'){
+      //   this.Detail = this.$route.query.datas;
+      //   this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
+      //   this.reson = this.Detail.recommended_reasons.split(";");
+      // }else if(this.$route.query.type=='list'){
+      //   this.Detail = this.$route.query.listDatas;
+      //   this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
+      //   //console.log("d-------",this.Detail)
+      //    this.reson = this.Detail.recommended_reasons.split(";");
+      // }
 
-      //console.log("tour_type------",this.$route.query.tour_type);
+      console.log("goods--------",this.$store.state.goodsData.type)
+      this.Detail = this.$store.state.goodsData.sendDatas;
+      this.reson = this.Detail.recommended_reasons.split(";");
+      this.imgurl = 'http://10.80.7.125/MyRead/'+this.Detail.img_addr;
     },
     methods:{
       xingCheng(){
@@ -297,12 +310,11 @@
         })
       },
       goBack(){
-        if(this.$route.query.type=='vvip'){
+        if(this.$store.state.goodsData.type=='vvip'){
             this.$router.push({
               path: '/pages'
-
             })
-        }else if(this.$route.query.type=='list'){
+        }else if(this.$store.state.goodsData.type=='list'){
           this.$router.push({
             path: '/list',
             query:{tour_type:this.$route.query.tour_type}
@@ -311,31 +323,34 @@
       },
       //分享
       share(){
-        console.log("0000000000000000")
-        //分享到新浪微博
-        function shareSina() {
-          var sharesinastring = 'http://service.weibo.com/share/share.php?title=' + $("#title").val() + '&url=' + $("#url").val();
-          window.location.href = sharesinastring;
-        }
-        //分享qq空间
-        function shareQQzone(){
-          var p = {
-            url:location.href,
-            showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
-            desc:'',/*默认分享理由(可选)*/
-            summary:'',/*分享摘要(可选)*/
-            title:'',/*分享标题(可选)*/
-            site:'满艺网',/*分享来源 如：腾讯网(可选)*/
-            pics:'', /*分享图片的路径(可选)*/
-            style:'203',
-            width:98,
-            height:22
+          this.shareJudge = true;
+          //分享
+          window._bd_share_config = {
+            common : {
+              bdText : '自定义分享内容',
+              bdDesc : '自定义分享摘要',
+              bdUrl : 'http://www.baidu.com',
+              bdPic : '自定义分享图片'
+            },
+            share : [{
+              "bdSize" : 64
+            }],
+            slide : [{
+              bdImg : 8,
+              bdPos : "right",
+              bdTop : 50
+            }],
+            image : [{
+              viewType : 'list',
+              viewPos : 'top',
+              viewColor : 'black',
+              viewSize : '32',
+              viewList : ['sqq','weixin','tsina']
+            }],
+            selectShare : [{
+              "bdselectMiniList" : ['sqq','weixin','tsina']
+            }]
           };
-          //分享到QQ空间
-          var sharesinastring = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=' + $("#title").val() + '&url=' + $("#url").val() + '&site="满艺网"';
-          window.location.href = sharesinastring;
-        }
-        shareQQzone();
       }
     }
   }
@@ -386,6 +401,7 @@
   .box{
     width: 100%;
     background-color: rgb(238,238,238);
+
   }
   .swiper-container{
     height: 500px;
@@ -722,5 +738,23 @@
     margin: 50px 0 30px 70px;
     font-size: 23px;
     color: gray;
+  }
+
+  /*分享*/
+  .shareBox{
+    width: 750px;
+    height: 100px;
+    background: skyblue;
+    position: fixed;
+    bottom:100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  .share_item{
+    display: inline-block;
+    margin:0 20px !important;
+
   }
 </style>

@@ -127,8 +127,10 @@
         Detail(index){
           this.$router.push({
             path: '/detail',
-            query:{type:'vvip',datas:this.vvipData[index]}
-          })
+            // query:{type:'vvip',datas:this.vvipData[index]}
+          });
+          var datas = {type:'vvip',sendDatas:this.vvipData[index]};
+          this.$store.dispatch('getGoodsDatail',datas);
         }
       },
       mounted(){
