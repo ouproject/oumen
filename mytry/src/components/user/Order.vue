@@ -13,7 +13,7 @@
         <div class="heline" v-show="isShow"></div>
         <div class="orderlist" v-show="isShow">
           <div class="listall">全部订单</div>
-          <div class="listall" @click="waitpay">代付款</div>
+          <div class="listall" @click="waitpay">待付款</div>
           <div class="listall" @click="waitgo">待出发</div>
           <div class="listall" @click="endtime">已完成</div>
           <div class="listall" @click="delpay">已取消</div>

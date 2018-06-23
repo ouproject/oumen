@@ -21,6 +21,7 @@ import List from '@/components/list/List'
 import WirteInfo from '@/components/listDetail/WirteInfo'
 import Detail from '@/components/listDetail/Detail'
 import PayMoney from '@/components/listDetail/PayMoney'
+import Payend from '@/components/listDetail/Endpay'
 
 Vue.use(Router)
 
@@ -101,6 +102,11 @@ export default new Router({
     {
       path:'/pay',
       component:PayMoney
+
+    },
+    {
+      path:'/end',
+      component:Payend
 
     }
 

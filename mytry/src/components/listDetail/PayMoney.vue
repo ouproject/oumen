@@ -76,11 +76,30 @@
               path: '/login',
             });
           }else{
+            this.$store.commit('OrderSate','待付款')
+            var params = new URLSearchParams();
+            params.append('reg_tel', this.$store.state.loginTel);
+            params.append('money', this.pricesall);
+            params.append('user_name',this.$store.state.familys.personum);
+            params.append('user_tel', this.$store.state.familys.phonenum);
+            params.append('goods_id', this.$store.state.goodsData.sendDatas.goods_id);
+            params.append('state', this.$store.state.orderSate);
+            params.append('old_num', this.$store.state.orderPay.num);
+            params.append('child_num', this.$store.state.orderPay.nummber);
+            console.log(this.pricesall)
+            this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=addOrder',params)
+              .then((res) => {
+                console.log(res)
+
+              }).catch((err) => {
+              console.log(err)
+            })
             this.$router.push({
-              path: '/orderdetail',
-            });
+              path: '/orderdetail'
+            })
           }
         },
+
 
       },
       computed:{

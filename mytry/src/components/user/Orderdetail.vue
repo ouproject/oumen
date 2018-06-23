@@ -1,7 +1,7 @@
 <template>
 <div>
   <mt-header title="订单详情" class="usersheader">
-    <router-link to="/order" slot="left">
+    <router-link to="/pay" slot="left">
       <mt-button icon="back"></mt-button>
     </router-link>
   </mt-header>
@@ -9,7 +9,7 @@
     <div class="ordertetail">
       <div class="headerdetail">
         <div class="orderleft">
-          <p class="leftp1">已完成</p>
+          <p class="leftp1">{{$store.state.orderSate}}</p>
           <p class="leftp2">订单编号:4957384</p>
         </div>
         <div class="orderRight">
@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="orderfoot">
-        <div class="orderfoot1">取消订单</div>
+        <div class="orderfoot1" @click="delorder">取消订单</div>
         <div class="orderfoot2" @click="payall">预支付款</div>
       </div>
     </div>
@@ -78,22 +78,50 @@
         }
       },
       methods:{
-        payall(){
+        delorder(){
+          this.$store.commit('OrderSate','已取消')
           var params = new URLSearchParams();
+          params.append('reg_tel', this.$store.state.loginTel);
           params.append('money', this.pricesall);
           params.append('user_name',this.$store.state.familys.personum);
           params.append('user_tel', this.$store.state.familys.phonenum);
           params.append('goods_id', this.$store.state.goodsData.sendDatas.goods_id);
-          params.append('state', '已完成');
-          // params.append('persons5', this.persons5);
-          // params.append('persons6', this.persons6);
+          params.append('state', this.$store.state.orderSate);
+          params.append('old_num', this.$store.state.orderPay.num);
+          params.append('child_num', this.$store.state.orderPay.nummber);
           console.log(this.pricesall)
-          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder',params)
+          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=addOrder',params)
             .then((res) => {
               console.log(res)
+              this.$router.push({
+                path: '/pages'
+              })
             }).catch((err) => {
             console.log(err)
           })
+        },
+        payall(){
+          this.$store.commit('OrderSate','已完成')
+          var params = new URLSearchParams();
+          params.append('reg_tel', this.$store.state.loginTel);
+          params.append('money', this.pricesall);
+          params.append('user_name',this.$store.state.familys.personum);
+          params.append('user_tel', this.$store.state.familys.phonenum);
+          params.append('goods_id', this.$store.state.goodsData.sendDatas.goods_id);
+          params.append('state', this.$store.state.orderSate);
+          params.append('old_num', this.$store.state.orderPay.num);
+          params.append('child_num', this.$store.state.orderPay.nummber);
+          console.log(this.pricesall)
+          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=addOrder',params)
+            .then((res) => {
+              console.log(res)
+              this.$router.push({
+                path: '/end'
+              })
+            }).catch((err) => {
+            console.log(err)
+          })
+
         }
       },
       computed:{
@@ -118,6 +146,7 @@
     color: gray;
     border-bottom: 1px solid #e6e6e6;
   }
+
   .ordertetail{
 
   }

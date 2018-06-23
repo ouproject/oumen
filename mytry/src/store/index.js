@@ -9,7 +9,8 @@ export default new Vuex.Store({
     loginTel:"",
     goodsData:{},
     orderPay:{},
-    familys:{}
+    familys:{},
+    orderSate:{}
   },
   //用getters方式获取数据
 
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     faMily(state,family){
       this.state.familys = family;
       // console.log("family-------",this.state.familys)
+    },
+    OrderSate(state,order){
+      this.state.orderSate = order;
     }
   },
   actions:{
