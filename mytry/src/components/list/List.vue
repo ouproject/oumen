@@ -315,6 +315,7 @@
     line-height: 45px;
     background-color: rgba(7,17,27,0.4);
     border-radius: 10px;
+    padding: 0 5px;
 
   }
   .lotbo{
@@ -353,7 +354,7 @@
     float: left;
     margin-left: 9px;
     border-radius: 50%;
-    background-color: gray;
+    background-color: rgba(7,17,27,0.2);
     text-align: center;
   }
   .prcienum{

@@ -7,7 +7,7 @@
             <img src="../../assets/img/back.png" />
           </div>
         <!--</router-link>-->
-          <div class="enshrine">
+          <div @click="shouCang" class="enshrine">
             <img src="../../assets/img/enshrine.png" />
           </div>
           <div class="share" @click="share">️
@@ -254,7 +254,16 @@
 
 <script>
   import Swiper from 'swiper';
-
+  function setCookie(key,value,day){
+    if (day) {
+      var date = new Date();
+      var r = date.getDate();
+      date.setDate(r + day);
+      document.cookie = key+'='+value+';expires='+date;
+    }else{
+      document.cookie = key+'='+value;
+    }
+  }
   export default {
     name: "Detail",
     data:function(){
@@ -287,6 +296,10 @@
       xingCheng(){
         this.isShows = true;
         this.isShow = false;
+      },
+      shouCang(){
+        console.log("******************",this.$store.state.goodsData.sendDatas.tour_id);
+        setCookie('goods',this.$store.state.goodsData.sendDatas.tour_id);
       },
       pingJia(){
         this.isShow = true;

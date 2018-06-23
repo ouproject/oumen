@@ -4,7 +4,7 @@
          <router-view></router-view>
           <router-link tag="span" :to="{path:'/user'}">
             <div class="mineimg">
-              <img src="../../assets/img/tg.jpg">
+              <img src="../../assets/img/userhe.png">
             </div>
           </router-link>
           <div class="logins">
@@ -128,7 +128,8 @@
 .mineheader{
   width: 750px;
   height: 420px;
-  background-image: url("../../assets/img/user1.jpg");
+  background-image: url("../../assets/img/minebg.jpg");
+  background-size: 750px;
   background-repeat: no-repeat;
   overflow: hidden;
 }

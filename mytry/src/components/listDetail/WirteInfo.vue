@@ -129,7 +129,7 @@
           emails:this.emails,
         }
         this.$store.commit("faMily",obj)
-        console.log("goods666666666666666-----",this.$store.state.familys)
+        // console.log("goods666666666666666-----",this.$store.state.familys)
       }
     }
   }
@@ -266,7 +266,7 @@
   }
   .xinxi ul li{
     height: 80px;
-    width: 720px;
+    width: 750px;
     background-color: white;
     line-height: 80px;
     font-size: 30px;
@@ -274,11 +274,11 @@
   }
   .xinxi ul li input{
     outline:none;
-    line-height: 80px;
+    /*line-height: 80px;*/
   }
   .lvke ul li{
     height: 80px;
-    width: 720px;
+    width: 750px;
     background-color: white;
     line-height: 80px;
     font-size: 30px;

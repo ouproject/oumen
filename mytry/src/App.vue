@@ -7,14 +7,15 @@
         <div><i class="icon-user"></i></div>
         <div>首页</div>
       </router-link>
-      <router-link class="footItem" tag="span" :to="{path:'/time'}">
-        <div><i class="icon-sphere"></i></div>
-        <div> 年龄</div>
-      </router-link>
       <router-link class="footItem" tag="span" :to="{path:'/mine'}">
         <div> <i class="icon-home2"></i></div>
         <div>我的</div>
       </router-link>
+      <router-link class="footItem" tag="span" :to="{path:'/ages'}">
+        <div><i class="icon-sphere"></i></div>
+        <div>介绍</div>
+      </router-link>
+
     </div>
   </div>
 </template>
@@ -56,6 +57,6 @@ export default {
     width: 50px;
   }
   .router-link-active{
-    color: blue;
+    color: rgb(0,164,251);
   }
 </style>

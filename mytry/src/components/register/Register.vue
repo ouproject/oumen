@@ -1,6 +1,6 @@
 <template>
   <div class="registerContainer">
-    <img class="regBg" src="../../assets/img/shou1.jpg" alt="">
+    <img class="regBg" src="../../assets/img/rebg.jpg">
     <!--<i class="iconfont icon-suo" style="color: red"></i>-->
     <div class="fromContainer">
       <div class="regTitle">注册</div>
