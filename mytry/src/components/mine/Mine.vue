@@ -104,18 +104,21 @@
                 path: '/login',
               });
             }else {
+              var params = new URLSearchParams();
+              params.append('reg_tel', this.$store.state.loginTel);
+              // params.append('persons1', this.persons1);
+              this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder',params)
+                .then((res) => {
+                  console.log("9999999999999999",res.data);
+                }).catch((err) => {
+                console.log(err)
+              })
+
               this.$router.push({
                 path: '/order',
               });
             }
 
-
-            // this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder')
-            //   .then((res) => {
-            //     console.log(res.data);
-            //   }).catch((err) => {
-            //   console.log(err)
-            // })
           }
         }
     }

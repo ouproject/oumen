@@ -16,7 +16,7 @@
         </li>
         <li class="reg_item">
           <i class="iconfont icon-suo reg_font" ></i>
-          <input class="reg_ipt" type="text" placeholder="请输入密码" ref="pwdVal" >
+          <input class="reg_ipt" type="password" placeholder="请输入密码" ref="pwdVal" >
           <i class="iconfont icon-iconset0207 reg_pwdFont" ></i>
         </li>
         <li  class="erroPromt" v-show="erroJudge" style="color: red;font-size:10px"> 用户名或密码不正确</li>
