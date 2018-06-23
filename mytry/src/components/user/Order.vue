@@ -13,12 +13,10 @@
         <div class="heline" v-show="isShow"></div>
         <div class="orderlist" v-show="isShow">
           <div class="listall">全部订单</div>
-          <router-link :to="{path:'/orderdetail'}">
-            <div class="listall">代付款</div>
-          </router-link>
-          <div class="listall">待出发</div>
-          <div class="listall">已完成</div>
-          <div class="listall">已取消</div>
+          <div class="listall" @click="waitpay">代付款</div>
+          <div class="listall" @click="waitgo">待出发</div>
+          <div class="listall" @click="endtime">已完成</div>
+          <div class="listall" @click="delpay">已取消</div>
         </div>
       </div>
       <div class="orderright">
@@ -155,6 +153,26 @@
         },
         Shows(){
           this.isShows = !this.isShows;
+        },
+        waitpay(){
+          this.$router.push({
+            path: '/orderdetail',
+          });
+        },
+        waitgo(){
+          this.$router.push({
+            path: '/orderdetail',
+          });
+        },
+        endtime(){
+          this.$router.push({
+            path: '/orderdetail',
+          });
+        },
+        delpay(){
+          this.$router.push({
+            path: '/orderdetail',
+          });
         }
       }
 

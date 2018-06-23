@@ -86,7 +86,7 @@
           <div class="bottoms">
             <p class="bottoms1">
               <span>出发时间：</span>
-              <span class="timenum">2015-08-12</span>
+              <span class="timenum">{{$store.state.goodsData.sendDatas.starttime}}</span>
             </p>
             <p class="bottoms2">
               <span>出行人数:</span>
@@ -106,10 +106,10 @@
         name: "WriteTime",
         data: function () {
           return {
-            num:0,
-            nummber:0,
-            prices:36700,
-            prices1:26700,
+            num:1,
+            nummber:1,
+            prices:this.$store.state.goodsData.sendDatas.new_price,
+            prices1:this.$store.state.goodsData.sendDatas.new_price,
             currentDay: 1,
             currentMonth: 1,
             currentYear: 1970,
@@ -141,12 +141,21 @@
           this.$router.push({
             path: '/wirteInfo'
           })
+          var obj= {
+            num:this.num,
+            nummber:this.nummber,
+            prices:this.prices,
+            prices1:this.prices1,
+          }
+          this.$store.commit("orderPrice",obj)
+          console.log("goods5555555555555-----",this.$store.state.orderPay)
         },
         delnum1(){
-          this.prices =36700;
-          if(this.num>0){
+          // this.prices =36700;
+          if(this.num>1){
             this.num--;
             this.prices = this.prices * this.num;
+            console.log("------",this.prices)
           }
         },
         addnum1(){
@@ -154,8 +163,8 @@
             this.prices = this.prices * this.num;
         },
         delnum2(){
-          this.prices1 =26700;
-          if(this.nummber>0){
+          // this.prices1 =26700;
+          if(this.nummber>1){
             this.nummber--;
             this.prices1 = this.prices1 * this.nummber;
           }

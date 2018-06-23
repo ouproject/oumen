@@ -97,8 +97,19 @@
       },
         methods:{
           //点击查看订单--判断是否是登陆状态
+
           selOrder(){
-            console.log("000000");
+            if(this.$store.state.loginTel == ''){
+              this.$router.push({
+                path: '/login',
+              });
+            }else {
+              this.$router.push({
+                path: '/order',
+              });
+            }
+
+
             // this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder')
             //   .then((res) => {
             //     console.log(res.data);
