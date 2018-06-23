@@ -106,11 +106,11 @@
 
             var params = new URLSearchParams();
             params.append('tour_name', this.tour_type);
-            console.log("tour_name------",this.tour_type);
+            //console.log("tour_name------",this.tour_type);
             this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=seltourType',params)
               .then((res) => {
                 this.listData= res.data;
-                console.log("listdata--------",this.listData);
+                console.log("listdata---ajax-----",this.listData);
               }).catch((err) => {
               console.log(err)
             })
@@ -118,7 +118,7 @@
 
           //根据搜索
           if(this.$route.query.selwords != undefined){
-            console.log("00000000000000");
+            //console.log("00000000000000");
             this.disTop = false;
             var keyword = this.$route.query.selwords;
             this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=mistsSel&selwords='+keyword)
@@ -170,7 +170,7 @@
                   this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=seltourType',params)
                     .then((res) => {
                       this.listData= res.data;
-                      //console.log("listdata--------",this.listData);
+                      // console.log("listdata---ajax-----",this.listData);
                     }).catch((err) => {
                     console.log(err)
                   })

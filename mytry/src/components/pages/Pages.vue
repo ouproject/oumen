@@ -91,7 +91,7 @@
             <span class="complimentary1">偶们自营</span>
             <span class="complimentary2" >
               <span>随性赠送礼品：</span>
-              <span v-for="(val,key) in v.gift.split(';')">{{val}}、</span>
+              <!--<span v-for="(val,key) in v.gift.split(';')">{{val}}、</span>-->
             </span>
           </p>
         </div>
