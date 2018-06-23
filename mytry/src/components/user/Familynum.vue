@@ -11,43 +11,43 @@
         <div>
           <div class="familyfrist">
             <p class="familyfrist1">我的家人</p>
-            <select v-model="obj.persons" class="familyfrist2">
+            <select v-model="persons" class="familyfrist2">
               <option>儿童</option>
               <option>成人</option>
             </select>
           </div>
           <div class="familyfrist">
             <p class="familyfrist1">姓名</p>
-            <input v-model="obj.persons1" class="familyfrist2 familyp" />
+            <input v-model="persons1" class="familyfrist2 familyp" />
           </div>
           <div class="familyfrist">
             <p class="familyfrist1">性别</p>
-            <select v-model="obj.persons2" class="familyfrist2">
+            <select v-model="persons2" class="familyfrist2">
               <option>男</option>
               <option>女</option>
             </select>
           </div>
           <div class="familyfrist">
             <p class="familyfrist1">出生日期</p>
-            <input v-model="obj.persons3" type="date" class="familyfrist2 familyp1" />
+            <input v-model="persons3" type="date" class="familyfrist2 familyp1" />
           </div>
         </div>
         <div class="mineline"></div>
         <div>
           <div class="familyfrist">
             <p class="familyfrist1">证件类型</p>
-            <select v-model="obj.persons4" class="familyfrist2">
+            <select v-model="persons4" class="familyfrist2">
               <option>护照</option>
               <option>身份证</option>
             </select>
           </div>
           <div class="familyfrist">
             <p class="familyfrist1">证件号</p>
-            <input v-model="obj.persons5" class="familyfrist2 familyp2" />
+            <input v-model="persons5" class="familyfrist2 familyp2" />
           </div>
           <div class="familyfrist">
             <p class="familyfrist1">手机号</p>
-            <input v-model="obj.persons6" placeholder="必填" class="familyfrist2 familyp2" />
+            <input v-model="persons6" placeholder="必填" class="familyfrist2 familyp2" />
           </div>
         </div>
         <div class="mineline"></div>
@@ -67,8 +67,7 @@
         name: "Familynum",
       data:function () {
         return{
-          num:1,
-          obj:{
+            num:1,
             persons:'',
             persons1:'',
             persons2:'',
@@ -76,7 +75,6 @@
             persons4:'',
             persons5:'',
             persons6:'',
-          }
 
 
         }
@@ -94,8 +92,8 @@
           // let formData = new FormData();
           // FormData.append('persons',this.texts)
 
-          var reg_form = document.getElementById("familynums");
-          var formdata = new FormData(reg_form);
+          // var reg_form = document.getElementById("familynums");
+          // var formdata = new FormData(reg_form);
           // formdata.append("test","112121");
           //   console.log(formdata);
 
@@ -107,14 +105,14 @@
           };
           //
           //
-          // var params = new URLSearchParams();
-          // params.append('persons', this.persons);
-          // params.append('persons1', this.persons1);
-          // params.append('persons2', this.persons2);
-          // params.append('persons3', this.persons3);
-          // params.append('persons4', this.persons4);
-          // params.append('persons5', this.persons5);
-          // params.append('persons6', this.persons6);
+          var params = new URLSearchParams();
+          params.append('persons', this.persons);
+          params.append('persons1', this.persons1);
+          params.append('persons2', this.persons2);
+          params.append('persons3', this.persons3);
+          params.append('persons4', this.persons4);
+          params.append('persons5', this.persons5);
+          params.append('persons6', this.persons6);
           // console.log(formdata);
 
 
@@ -122,7 +120,7 @@
           // params.append('tour_name', this.tour_type);
 
           console.log(this.obj);
-          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=add_family_info',formdata,config)
+          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=add_family_info',params,config)
             .then((res) => {
               console.log(res)
             }).catch((err) => {
