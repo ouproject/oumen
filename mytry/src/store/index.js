@@ -39,6 +39,17 @@ export default new Vuex.Store({
         //context.commit('getGoodsDatail');
         //你还可以在这里触发其他的mutations方法
         this.state.goodsData = obj;
+
+
+        // var params = new URLSearchParams();
+        // params.append('goods_id', obj);
+        // //selDetail  发送请求 获取对应的旅游线路数据
+        // this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selDetail',params)
+        //   .then((res) => {
+        //      console.log("listdata---ajax-----",res.data);
+        //   }).catch((err) => {
+        //   console.log(err)
+        // })
       }
   }
 
