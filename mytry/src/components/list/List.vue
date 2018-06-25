@@ -107,7 +107,7 @@
             var params = new URLSearchParams();
             params.append('tour_name', this.tour_type);
             console.log("tour_name------",this.tour_type);
-            this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=seltourType',params)
+            this.$http.post(this.baseUrl+'m=Home&c=Tour&a=seltourType',params)
               .then((res) => {
                 this.listData= res.data;
                 console.log("listdata--------",this.listData);
@@ -121,7 +121,7 @@
             console.log("00000000000000");
             this.disTop = false;
             var keyword = this.$route.query.selwords;
-            this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=mistsSel&selwords='+keyword)
+            this.$http.post(this.baseUrl+'m=Home&c=Tour&a=mistsSel&selwords='+keyword)
               .then((res) => {
                 this.listData= res.data;
                 console.log(this.listData)
@@ -167,7 +167,7 @@
                   params.append('orderType', orderType);
                   params.append('tour_name', this.tour_type);
 
-                  this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=seltourType',params)
+                  this.$http.post(this.baseUrl+'m=Home&c=Tour&a=seltourType',params)
                     .then((res) => {
                       this.listData= res.data;
                       //console.log("listdata--------",this.listData);
@@ -202,6 +202,18 @@
             path: '/detail',
             // query:{type:'list',listDatas:this.listData[index],tour_type:this.tour_type}
           })
+          //查询行程数据
+          var params = new URLSearchParams();
+          params.append('scheduling', this.listData[index].scheduling);
+          this.$http.post(this.baseUrl+'m=Home&c=Tour&a=selScheduling',params)
+            .then((res) => {
+              this.$store.commit('getScheduling',res.data);
+              console.log("selScheduling--------",this.$store.state.schedulingData);
+            }).catch((err) => {
+            console.log(err)
+          })
+
+
           var datas = {type:'list',sendDatas:this.listData[index],tour_type:this.tour_type};
           this.$store.dispatch('getGoodsDatail',datas);
         }

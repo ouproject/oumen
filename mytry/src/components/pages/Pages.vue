@@ -125,10 +125,25 @@
           })
         },
         Detail(index){
+          //跳转详情页
           this.$router.push({
             path: '/detail',
             // query:{type:'vvip',datas:this.vvipData[index]}
           });
+
+          var params = new URLSearchParams();
+          params.append('scheduling', this.vvipData[index].scheduling);
+          this.$http.post(this.baseUrl+'m=Home&c=Tour&a=selScheduling',params)
+            .then((res) => {
+              this.$store.commit('getScheduling',res.data);
+              console.log("selScheduling--------",this.$store.state.schedulingData);
+            }).catch((err) => {
+            console.log(err)
+          })
+
+
+
+
           var datas = {type:'vvip',sendDatas:this.vvipData[index]};
           this.$store.dispatch('getGoodsDatail',datas);
         }
@@ -146,7 +161,7 @@
         })
 
         //发送请求--返回旅游线路数据
-        this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selvip')
+        this.$http.post(this.baseUrl+'m=Home&c=Tour&a=selvip')
           .then((res) => {
             this.vvipData= res.data;
             console.log("vvipData-------",this.vvipData);

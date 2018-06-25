@@ -12,11 +12,11 @@
         <img class="pimg" src="../../assets/img/more_unfold.png">
         <div class="heline" v-show="isShow"></div>
         <div class="orderlist" v-show="isShow">
-          <div class="listall">全部订单</div>
-          <div class="listall" @click="waitpay">待付款</div>
-          <div class="listall" @click="waitgo">待出发</div>
-          <div class="listall" @click="endtime">已完成</div>
-          <div class="listall" @click="delpay">已取消</div>
+          <div class="listall" @click="selstate('')">全部订单</div>
+          <div class="listall" @click="selstate('待付款')">待付款</div>
+          <div class="listall" @click="selstate('待出发')">待出发</div>
+          <div class="listall" @click="selstate('已完成')">已完成</div>
+          <div class="listall" @click="selstate('已取消')">已取消</div>
         </div>
       </div>
       <div class="orderright">
@@ -94,7 +94,8 @@
           return{
             isShow:false,
             isShows:false,
-            orderData:[]
+            orderData:[],
+            stateData:[]
 
           }
         },
@@ -103,11 +104,9 @@
       mounted(){
         var params = new URLSearchParams();
         params.append('reg_tel', this.$store.state.loginTel);
-        this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder',params)
+        this.$http.post(this.baseUrl+'m=Home&c=Tour&a=selOrder',params)
           .then((res) => {
             this.orderData= res.data;
-
-
           }).catch((err) => {
           console.log(err)
         })
@@ -119,40 +118,28 @@
         Shows(){
           this.isShows = !this.isShows;
         },
-        waitpay(){
-          console.log('-------------初始data-------------------',this.orderData)
-          //var arr = [{a:1,c:true},{a:2,c:false},{a:3,c:true}]
-          // var arr = this.orderData.filter(function(index,el,self){
-          //   return el;
-          // })
+        selstate(state){
+          console.log('-------------参数state-------------------',state)
+          var params = new URLSearchParams();
+          params.append('reg_tel', this.$store.state.loginTel);
+          params.append('state', state);
+          this.$http.post(this.baseUrl+'m=Home&c=Tour&a=selOrder',params)
+            .then((res) => {
+              this.orderData= res.data;
+              console.log('-------------orderData-------------------',this.orderData)
+              // this.$store.commit('getScheduling',this.orderData);
+              this.$router.push({
+                path: '/orderdetail',
+                query:{'orderdetailData':this.orderData}
+              });
 
-          // for(var i=0;i<this.orderData.length;i++){
-          //
-          //   if(this.orderData[i].state != '待付款'){
-          //     this.orderData.splice(this.orderData[i],1);
-          //     console.log('---orderdata------------',this.orderData)
-          //   }
-          // }
+            }).catch((err) => {
+            console.log(err)
+          })
 
-          // this.$router.push({
-          //   path: '/orderdetail',
-          // });
+
         },
-        waitgo(){
-          this.$router.push({
-            path: '/orderdetail',
-          });
-        },
-        endtime(){
-          this.$router.push({
-            path: '/orderdetail',
-          });
-        },
-        delpay(){
-          this.$router.push({
-            path: '/orderdetail',
-          });
-        },
+
         Details(index){
           var c = {type:'order',sendDatas:this.orderData[index],tour_type:this.orderData[index].tour_name};
           this.$store.dispatch('getGoodsDatail',c);
@@ -178,7 +165,7 @@
 
 
           this.$router.push({
-            path: '/orderdetail',
+            path: '/listorder',
           });
         }
       }

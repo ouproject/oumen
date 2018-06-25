@@ -1,17 +1,14 @@
 <template>
     <div class="box">
       <div class="swiper-container">
-        <!--<router-view></router-view>-->
-        <!--<router-link :to="{path:'/pages'}">-->
           <div class="back" @click="goBack">
             <img src="../../assets/img/back.png" />
           </div>
-        <!--</router-link>-->
-          <div @click="shouCang" class="enshrine">
-            <img src="../../assets/img/enshrine.png" />
+          <div @click="shouCang" :class="lights?'enn':'enshrine'">
+            <i class="icon-star-empty"></i>
           </div>
           <div class="share" @click="share">️
-            <img src="../../assets/img/share.png" />
+            <i class="icon-redo2"></i>
          ️</div>
           <div class="tag">超值特惠</div>
         <div class="swiper-wrapper">
@@ -90,9 +87,6 @@
         <h2>推荐理由</h2>
         <ul v-for="(v,k) in reson">
           <li>{{k+1}}、{{v}}</li>
-          <!--<li>1、 韩式五星级酒店，乐天马浦酒店住宿</li>-->
-          <!--<li>2、 大韩航空，直飞不奔波，出行更便利</li>-->
-          <!--<li>3、 韩国旅游发展局提供的精彩绝伦的表演秀（根据当地演出时间安排乱打秀或涂鸦秀）</li>-->
         </ul>
       </div>
 
@@ -137,67 +131,40 @@
         </ul>
       </div>
       <div class="route" v-show="isShows">
-        <div class="stroke">
-          <span class="pag">第1天</span>
-          <span>北京 - 首尔</span>
+        <div class="stroke strokeb" v-for="(v,k) in $store.state.schedulingData">
+          <span class="pag">第{{k+1}}天</span>
+          <span>{{v.start_addr}} - {{v.end_addr}}</span>
           <ul>
             <li>
               <img src="../../assets/img/hangban.png" />
               <span>航班：</span>
-              <p>CZD653 (12:00 - 22:00)</p>
+              <p>{{v.flight}}</p>
             </li>
             <li>
               <img src="../../assets/img/jiaotong.png" />
               <span>交通：</span>
-              <p>旅游空调大巴</p>
+              <p>{{v.vehicle}}</p>
             </li>
             <li>
               <img src="../../assets/img/canyin.png" />
               <span>餐饮：</span>
-              <p class="day">早餐——自理<br />午餐——自理<br />晚餐——中式团餐</p>
+              <span class="day">{{v.foods}}</span>
             </li>
             <li>
               <img src="../../assets/img/zhusu.png" />
               <span>住宿：</span>
-              <p>当地六星级酒店</p>
+              <p>{{v.stay}}</p>
             </li>
             <li class="shuoming">
-              上午：抵达仁川国际机场，办理出境手续<br />
-              下午：导游机场接机，首尔市区活动过后到达酒店，班里入住手续<br />
-              <img src="../../assets/img/fengjing.png" />
-              <br />
-              首尔市区
+              <p><span style="font-weight: bold">上午：</span>{{v.morning}}</p><br>
+              <p style="margin-top: 20px"><span style="font-weight: bold">下午：</span>{{v.afternoon}}</p>
+              <!--<img :src="'http://10.80.7.125/MyRead/'+v.img"  v-show="v.img" />-->
+              <!--<br />-->
+              <!--{{v.img_title}}-->
             </li>
           </ul>
         </div>
-        <div class="stroke strokeb">
-          <span class="pag">第2天</span>
-          <span>首尔</span>
-          <ul>
-            <li>
-              <img src="../../assets/img/jiaotong.png" />
-              <span>交通：</span>
-              <p>旅游空调大巴</p>
-            </li>
-            <li>
-              <img src="../../assets/img/canyin.png" />
-              <span>餐饮：</span>
-              <p class="day">早餐——中式<br />午餐——中式<br />晚餐——中式</p>
-            </li>
-            <li>
-              <img src="../../assets/img/zhusu.png" />
-              <span>住宿：</span>
-              <p>当地六星级酒店</p>
-            </li>
-            <li class="shuoming">
-              上午：跆拳道馆体验（约两小时左右）<br />
-              下午：先去儿童大公园，然后到市民安全体验馆（如约满，更改其他行程或再议或特里爱立体博物馆）<br />
-              <img src="../../assets/img/fengjing.png" />
-              <br />
-              儿童大公园
-            </li>
-          </ul>
-        </div>
+
       </div>
 
       <div class="evaluate" v-show="isShow">
@@ -273,11 +240,12 @@
         reson:[],
         isShow:false,
         isShows:true,
-        shareJudge:false
+        shareJudge:false,
+        lights:false
       }
     },
     mounted(){
-      console.log(222);
+      console.log("selScheduling--33333333------",this.$store.state.schedulingData);
       new Swiper ('.swiper-container', {
         loop: true,
         autoplay:true,
@@ -300,6 +268,8 @@
       shouCang(){
         console.log("******************",this.$store.state.goodsData.sendDatas.tour_id);
         setCookie('goods',this.$store.state.goodsData.sendDatas.tour_id);
+        this.lights = true;
+
       },
       pingJia(){
         this.isShow = true;
@@ -430,9 +400,23 @@
     right: 130px;
     z-index: 9;
     background-color: black;
-    color: white;
     border-radius: 50%;
     opacity: 0.6;
+    color: white;
+    font-size: 40px;
+  }
+  .enn{
+    color: red;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 50px;
+    right: 130px;
+    z-index: 9;
+    background-color: black;
+    border-radius: 50%;
+    opacity: 0.6;
+    font-size: 40px;
   }
   .share{
     width: 60px;
@@ -444,7 +428,9 @@
     background-color: black;
     color: white;
     border-radius: 50%;
+    text-align: left;
     opacity: 0.6;
+    font-size: 40px;
   }
   .back img{
     padding-top: 13px;
@@ -452,10 +438,10 @@
     height: 40px;
   }
   .enshrine img{
-    padding-top: 10px;
+    padding-top: 5px;
   }
   .share img{
-    padding-top: 13px;
+    padding-top: 5px;
   }
   .tag{
     padding: 5px 15px;
@@ -662,7 +648,7 @@
     color: dodgerblue;
   }
   .stroke{
-    margin-top: 30px;
+    margin-top: 50px;
   }
   .stroke .pag{
     width: 150px;
@@ -692,14 +678,17 @@
     color: gray;
   }
   .stroke ul li .day{
-    display: block;
-    margin-left: 50px;
+    /*display: block;*/
+    margin-left: 20px;
   }
   .stroke ul .shuoming img{
     margin-top: 20px;
   }
   .stroke ul .shuoming{
     color: gray;
+    line-height: 45px;
+    margin-top: 30px;
+    padding: 0 10px;
   }
   .evaluate{
     background-color: white;

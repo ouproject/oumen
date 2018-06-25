@@ -52,7 +52,7 @@
           var params = new URLSearchParams();
           params.append('tel', this.$refs.telVal.value);
           params.append('passwd', this.$refs.pwdVal.value);
-          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Login&a=login', params)
+          this.$http.post(this.baseUrl+'m=Home&c=Login&a=login', params)
             .then((res) => {
               //console.log(res.data);
               if(res.data=='noTel'){

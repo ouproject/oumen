@@ -108,6 +108,8 @@
           return {
             num:1,
             nummber:1,
+            stateprices:this.$store.state.goodsData.sendDatas.new_price,
+            stateprices1:this.$store.state.goodsData.sendDatas.new_price,
             prices:this.$store.state.goodsData.sendDatas.new_price,
             prices1:this.$store.state.goodsData.sendDatas.new_price,
             currentDay: 1,
@@ -151,27 +153,27 @@
           console.log("goods5555555555555-----",this.$store.state.orderPay)
         },
         delnum1(){
-          // this.prices =36700;
           if(this.num>1){
             this.num--;
-            this.prices = this.prices * this.num;
-            console.log("------",this.prices)
+            this.prices = this.stateprices * this.num;
+            // console.log("------222222222",this.prices)
           }
         },
         addnum1(){
             this.num++;
-            this.prices = this.prices * this.num;
+          console.log("------222222222",this.prices)
+            this.prices = this.stateprices1 * this.num;
         },
         delnum2(){
           // this.prices1 =26700;
           if(this.nummber>1){
             this.nummber--;
-            this.prices1 = this.prices1 * this.nummber;
+            this.prices1 = this.stateprices * this.nummber;
           }
         },
         addnum2(){
           this.nummber++;
-          this.prices1 = this.prices1 * this.nummber;
+          this.prices1 = this.stateprices1 * this.nummber;
         },
         order:function (day) {  //预定函数
           if(this.leftobj[day.index].count>=1)
@@ -297,16 +299,13 @@
   .timeadd{
     width: 100%;
     height: 160px;
-    /*background-color: pink;*/
     display: flex;
   }
   .addperson{
     flex: 1;
-    /*background-color: deepskyblue;*/
   }
   .addchild{
     flex: 1;
-    /*background-color: yellow;*/
   }
   * {
     box-sizing: border-box;
@@ -319,11 +318,9 @@
 
   body {
     font-family: Verdana, sans-serif;
-    background: #E8F0F3;
   }
   #calendar{
     width:100%;
-    /*height: 800px;*/
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.1), 0 1px 5px 0 rgba(0,0,0,0.12);
   }
   .month {
@@ -340,7 +337,6 @@
 
   .year-month {
     display: flex;
-    /*flex-direction: column;*/
     align-items: center;
     justify-content: space-around;
   }

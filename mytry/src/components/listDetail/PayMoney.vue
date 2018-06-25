@@ -21,11 +21,11 @@
       <ul class="hbot">
         <li>
           <div class="zonge">出发地：</div>
-          <div class="zongenum">北京</div>
+          <div class="zongenum">{{$store.state.schedulingData[0].start_addr}}</div>
         </li>
         <li>
           <div class="zonge">目的地：</div>
-          <div class="zongenum">韩国</div>
+          <div class="zongenum">{{$store.state.schedulingData[0].end_addr}}</div>
         </li>
         <li>
           <div class="zonge">合计：</div>
@@ -69,6 +69,9 @@
             pricesall:Number(this.$store.state.orderPay.prices) + Number(this.$store.state.orderPay.prices1)
           }
       },
+      mounted(){
+        console.log("selScheduling--999999------",this.$store.state.schedulingData);
+      },
       methods:{
 
         paymoney(){
@@ -88,7 +91,7 @@
             params.append('old_num', this.$store.state.orderPay.num);
             params.append('child_num', this.$store.state.orderPay.nummber);
             console.log(this.pricesall)
-            this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=addOrder',params)
+            this.$http.post(this.baseUrl+'m=Home&c=Tour&a=addOrder',params)
               .then((res) => {
                 // res.setHeader("Content-type", "text/html;charset=UTF-8");
                 console.log(res)
@@ -97,7 +100,7 @@
               console.log(err)
             })
             this.$router.push({
-              path: '/orderdetail'
+              path: '/listorder'
             })
           }
         },

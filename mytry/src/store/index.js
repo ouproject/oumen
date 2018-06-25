@@ -10,7 +10,8 @@ export default new Vuex.Store({
     goodsData:{},
     orderPay:{},
     familys:{},
-    orderSate:{}
+    orderSate:{},
+    schedulingData:[]
   },
   //用getters方式获取数据
 
@@ -28,13 +29,15 @@ export default new Vuex.Store({
     },
     OrderSate(state,order){
       this.state.orderSate = order;
+    },
+    getScheduling(state,data){
+      this.state.schedulingData = data;
     }
   },
   actions:{
       getGoodsDatail(context,obj){
         //context.commit('getGoodsDatail');
         //你还可以在这里触发其他的mutations方法
-
         this.state.goodsData = obj;
       }
   }

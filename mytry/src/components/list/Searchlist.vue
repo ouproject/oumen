@@ -49,7 +49,7 @@
         },
         mounted:function () {
           var keyword = this.$route.query.selwords;
-          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=mistsSel&selwords='+keyword)
+          this.$http.post(this.baseUrl+'m=Home&c=Tour&a=mistsSel&selwords='+keyword)
             .then((res) => {
               this.Searchs= res.data;
                 console.log(this.Searchs)

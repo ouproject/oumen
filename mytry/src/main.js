@@ -17,7 +17,7 @@ import $ from 'jquery'
 // Vue.use(vueEventCalendar, {locale: 'en'}) //可以设置语言，支持中文和英文
 
 Vue.prototype.$http = Axios  //ajax插件
-// Vue.prototype.baseUrl = "/api"; //全局的变量
+ Vue.prototype.baseUrl = "/api"; //全局的变量
 
 
 Vue.use(Mint);

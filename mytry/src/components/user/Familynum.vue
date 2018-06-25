@@ -120,7 +120,7 @@
           // params.append('tour_name', this.tour_type);
 
           console.log(this.obj);
-          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=add_family_info',params,config)
+          this.$http.post(this.baseUrl+'m=Home&c=Tour&a=add_family_info',params,config)
             .then((res) => {
               console.log(res)
             }).catch((err) => {

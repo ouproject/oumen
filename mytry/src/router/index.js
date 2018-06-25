@@ -22,6 +22,7 @@ import WirteInfo from '@/components/listDetail/WirteInfo'
 import Detail from '@/components/listDetail/Detail'
 import PayMoney from '@/components/listDetail/PayMoney'
 import Payend from '@/components/listDetail/Endpay'
+import Listorder from '@/components/listDetail/ListOrder'
 
 Vue.use(Router)
 
@@ -107,6 +108,11 @@ export default new Router({
     {
       path:'/end',
       component:Payend
+
+    },
+    {
+      path:'/listorder',
+      component:Listorder
 
     }
 

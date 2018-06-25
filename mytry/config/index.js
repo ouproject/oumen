@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/api': {
-      //   target: 'http://localhost/',
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/api': '/'
-      //   }
-      // }
+      '/api': {
+        target: 'http://10.80.7.125/MyRead/index.php?',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }
     },
 
     // Various Dev Server settings

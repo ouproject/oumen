@@ -36,6 +36,7 @@
           <input v-model="emails" type="text" placeholder="(选填)" />
         </li>
       </ul>
+      <div v-show="shows" style="color: red;text-align: center">手机号格式错误或者姓名为空</div>
     </div>
     <h4>旅客信息：</h4>
     <p>{{$store.state.orderPay.num}}成人 {{$store.state.orderPay.nummber}}儿童</p>
@@ -95,7 +96,7 @@
         personum:'',
         phonenum:'',
         emails:'',
-
+        shows:false,
         pricesall:Number(this.$store.state.orderPay.prices) + Number(this.$store.state.orderPay.prices1)
       }
 
@@ -120,15 +121,35 @@
     },
     methods: {
       pays(){
-        this.$router.push({
-          path: '/pay'
-        })
-        var obj = {
-          personum:this.personum,
-          phonenum:this.phonenum,
-          emails:this.emails,
+        //进入去支付页面
+
+
+        var telVal = /^[1][3,4,5,7,8][0-9]{9}$/.test(this.phonenum);
+        console.log("id-------",this.phonenum);
+        //请求行程的数据
+        if(!telVal || this.phonenum=="" || this.personum ==""){
+          this.shows=true;
+        }else {
+
+          var params = new URLSearchParams();
+          params.append('scheduling', this.$store.state.goodsData.sendDatas.scheduling);
+          this.$http.post(this.baseUrl+'m=Home&c=Tour&a=selScheduling',params)
+            .then((res) => {
+              this.$store.commit('getScheduling',res.data);
+              // console.log("selScheduling--999999------",this.$store.state.schedulingData);
+            }).catch((err) => {
+            console.log(err)
+          })
+          this.$router.push({
+            path: '/pay'
+          })
+          var obj = {
+            personum:this.personum,
+            phonenum:this.phonenum,
+            emails:this.emails,
+          }
+          this.$store.commit("faMily",obj)
         }
-        this.$store.commit("faMily",obj)
         // console.log("goods666666666666666-----",this.$store.state.familys)
       }
     }

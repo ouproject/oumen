@@ -61,7 +61,7 @@
           console.log(getCookie('goods'));
           var params = new URLSearchParams();
           params.append('tour_id', getCookie('goods'));
-          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=seltourType', params)
+          this.$http.post(this.baseUrl+'m=Home&c=Tour&a=seltourType', params)
             .then((res) => {
               this.tourData = res.data;
               console.log(res.data);

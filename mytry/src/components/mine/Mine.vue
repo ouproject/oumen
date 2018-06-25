@@ -10,8 +10,14 @@
           <div class="logins">
             <!--<span>登录</span>-->
             <!--<span>/注册</span>-->
-            <router-link tag="span" :to="{path:'/login'}">登录</router-link>
-            <router-link tag="span" :to="{path:'/register'}">注册</router-link>
+            <div v-if="$store.state.loginTel==''">
+              <router-link tag="span" :to="{path:'/login'}">登录</router-link>
+              <router-link tag="span" :to="{path:'/register'}">注册</router-link>
+            </div>
+            <div v-else style="text-align: left;margin-left: -10px">
+              {{$store.state.loginTel}}
+            </div>
+
           </div>
           <div class="minebottom">
             <div class="minebottom1">
@@ -76,7 +82,7 @@
           <div class="orderimg" id="sets">
             <img src="../../assets/img/set.png">
           </div>
-          <div class="myorder">设置</div>
+          <div class="myorder" @click="gobye">退出</div>
           <div class="oderimgs">
             <img src="../../assets/img/arrow-right.png">
           </div>
@@ -107,7 +113,7 @@
               var params = new URLSearchParams();
               params.append('reg_tel', this.$store.state.loginTel);
               // params.append('persons1', this.persons1);
-              this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder',params)
+              this.$http.post(this.baseUrl+'m=Home&c=Tour&a=selOrder',params)
                 .then((res) => {
                   console.log("9999999999999999",res.data);
                 }).catch((err) => {
@@ -119,6 +125,9 @@
               });
             }
 
+          },
+          gobye(){
+            this.$store.state.loginTel = ''
           }
         }
     }
