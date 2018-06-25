@@ -6,17 +6,17 @@
     </router-link>
   </mt-header>
   <div>
-    <div class="pagelot">
+    <div class="pagelot" v-for="(v,k) in tourData">
       <div class="pagelot1">
-        <img src="../../assets/img/lot1.jpg">
+        <img :src="'http://10.80.7.125/MyRead/'+v.img_addr">
         <span class="lothui">冬令营</span>
         <p class="lotwin">
           <img id="eyes" src="../../assets/img/browse.png">
-          3456
+          {{v.follow_num}}
         </p>
         <span class="lotbo">育</span>
       </div>
-      <p class="titlelot">香港+澳门4晚5日经典观光游4晚5日经典4晚5日经典4晚5日经典</p>
+      <p class="titlelot">{{v.title}}</p>
       <p class="agelots">
         <span class="agelot">适合的年龄：</span>
         <span class="numslot">8</span><span class="numslot">9</span>
@@ -24,79 +24,51 @@
         <span class="numslot">12</span>
       </p>
       <p>
-        <span>￥23345起/人</span><span class="prcienum">市场价：￥50000</span>
+        <span>{{v.new_price}}起/人</span><span class="prcienum">市场价：{{v.old_price}}</span>
       </p>
       <p class="wacthimg">
         <span class="wacthimg1">返</span>
         <span class="wacthimg2">精</span>
       </p>
       <p class="complimentary">
-        <span class="complimentary2">随性赠送礼品：高档亲子装、高档雨衣、高档书包等性赠送礼品：高档亲子装、高档雨衣</span>
-      </p>
-    </div>
-    <div class="pagelot">
-      <div class="pagelot1">
-        <img src="../../assets/img/lot1.jpg">
-        <span class="lothui">冬令营</span>
-        <p class="lotwin">
-          <img id="eyes1" src="../../assets/img/browse.png">
-          3456
-        </p>
-        <span class="lotbo">育</span>
-      </div>
-      <p class="titlelot">香港+澳门4晚5日经典观光游4晚5日经典4晚5日经典4晚5日经典</p>
-      <p class="agelots">
-        <span class="agelot">适合的年龄：</span>
-        <span class="numslot">8</span><span class="numslot">9</span>
-        <span class="numslot">10</span><span class="numslot">11</span>
-        <span class="numslot">12</span>
-      </p>
-      <p>
-        <span>￥23345起/人</span><span class="prcienum">市场价：￥50000</span>
-      </p>
-      <p class="wacthimg">
-        <span class="wacthimg1">返</span>
-        <span class="wacthimg2">精</span>
-      </p>
-      <p class="complimentary">
-        <span class="complimentary2">随性赠送礼品：高档亲子装、高档雨衣、高档书包等性赠送礼品：高档亲子装、高档雨衣</span>
-      </p>
-    </div>
-    <div class="pagelot">
-      <div class="pagelot1">
-        <img src="../../assets/img/lot1.jpg">
-        <span class="lothui">冬令营</span>
-        <p class="lotwin">
-          <img id="eyes2" src="../../assets/img/browse.png">
-          3456
-        </p>
-        <span class="lotbo">育</span>
-      </div>
-      <p class="titlelot">香港+澳门4晚5日经典观光游4晚5日经典4晚5日经典4晚5日经典</p>
-      <p class="agelots">
-        <span class="agelot">适合的年龄：</span>
-        <span class="numslot">8</span><span class="numslot">9</span>
-        <span class="numslot">10</span><span class="numslot">11</span>
-        <span class="numslot">12</span>
-      </p>
-      <p>
-        <span>￥23345起/人</span><span class="prcienum">市场价：￥50000</span>
-      </p>
-      <p class="wacthimg">
-        <span class="wacthimg1">返</span>
-        <span class="wacthimg2">精</span>
-      </p>
-      <p class="complimentary">
-        <span class="complimentary2">随性赠送礼品：高档亲子装、高档雨衣、高档书包等性赠送礼品：高档亲子装、高档雨衣</span>
+        <span class="complimentary2">随性赠送礼品：{{v.gift}}</span>
       </p>
     </div>
   </div>
+  <div style="height: 50px;width: 100%"></div>
 </div>
 </template>
 
 <script>
+  function getCookie(key){
+    var myCookie = document.cookie;
+    var cookieArray = myCookie.split('; ');
+    for (var i = 0; i < cookieArray.length; i++) {
+      var newArray = cookieArray[i].split('=');
+      if(newArray[0] == key){
+        return newArray[1];
+      }
+    }
+  }
     export default {
-        name: "Collect"
+        name: "Collect",
+      data:function(){
+          return{
+            tourData:[]
+          }
+      },
+        mounted(){
+          console.log(getCookie('goods'));
+          var params = new URLSearchParams();
+          params.append('tour_id', getCookie('goods'));
+          this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=seltourType', params)
+            .then((res) => {
+              this.tourData = res.data;
+              console.log(res.data);
+            }).catch((err) => {
+            console.log(err)
+          })
+        }
     }
 </script>
 
@@ -116,7 +88,6 @@
     margin-top: 18px;
     overflow: hidden;
     border: 2px solid #e6e6e6;
-
   }
   .pagelot1{
     position: relative;
@@ -148,7 +119,7 @@
     text-align: center;
     height: 45px;
     line-height: 45px;
-    background-color: pink;
+    background-color: rgba(7,17,27,0.4);
     border-radius: 10px;
 
   }
@@ -188,7 +159,7 @@
     float: left;
     margin-left: 9px;
     border-radius: 50%;
-    background-color: gray;
+    background-color: rgba(7,17,27,0.2);
     text-align: center;
   }
   .prcienum{

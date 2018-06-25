@@ -70,6 +70,7 @@
           }
       },
       methods:{
+
         paymoney(){
           if(this.$store.state.loginTel == ''){
             this.$router.push({
@@ -89,6 +90,7 @@
             console.log(this.pricesall)
             this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=addOrder',params)
               .then((res) => {
+                // res.setHeader("Content-type", "text/html;charset=UTF-8");
                 console.log(res)
 
               }).catch((err) => {

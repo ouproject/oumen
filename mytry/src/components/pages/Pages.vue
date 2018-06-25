@@ -84,8 +84,8 @@
             <span>￥{{v.new_price}}起/人</span><span class="prcienum">市场价：￥{{v.old_price}}</span>
           </p>
           <p class="wacthimg">
-            <img :src="'http://10.80.7.125/MyRead/'+v.img_addr">
-            3456
+            <img src="../../assets/img/browse.png">
+            {{v.follow_num}}
           </p>
           <p class="complimentary" >
             <span class="complimentary1">偶们自营</span>
@@ -167,6 +167,9 @@
   height: 820px;
   overflow: hidden;
 }
+body{
+  position: relative;
+}
 a{
   text-decoration: none;
 }
@@ -175,19 +178,20 @@ a{
     height: 92px;
     line-height: 90px;
     /*background-color: pink;*/
-    position: fixed;
+    position: absolute;
     z-index: 10;
     top: 10px;
     display: flex;
-
   }
   .inpheader{
-    width: 490px;
+    width: 450px;
     height: 64px;
     border-radius: 30px;
     margin-left: 20px;
     color: #999;
     outline: none;
+    padding-left: 40px;
+    background-color: rgb(222,236,243);
   }
   .imghe{
     float: left;
@@ -229,7 +233,11 @@ a{
   height: 410px;
   /*margin: 20px auto;*/
 }
-
+  .swiper-container img{
+    width: 750px;
+    height: 410px;
+    /*margin: 20px auto;*/
+  }
   .travelnums{
     height: 360px;
     display: flex;
@@ -325,8 +333,9 @@ text-align: center;
     text-align: center;
     height: 45px;
     line-height: 45px;
-    background-color: pink;
+    background-color: rgba(7,17,27,0.4);
     border-radius: 10px;
+    padding: 0 5px;
 
   }
   .lotbo{
@@ -365,7 +374,7 @@ text-align: center;
     float: left;
     margin-left: 9px;
     border-radius: 50%;
-    background-color: gray;
+    background-color: rgba(7,17,27,0.2);
     text-align: center;
   }
   .prcienum{

@@ -1,7 +1,7 @@
 <template>
 <div>
   <mt-header title="订单详情" class="usersheader">
-    <router-link to="/pay" slot="left">
+    <router-link to="/order" slot="left">
       <mt-button icon="back"></mt-button>
     </router-link>
   </mt-header>
@@ -59,7 +59,7 @@
           <p class="orderuser3">{{$store.state.familys.phonenum}}</p>
         </div>
       </div>
-      <div class="orderfoot">
+      <div class="orderfoot" v-show="sHows">
         <div class="orderfoot1" @click="delorder">取消订单</div>
         <div class="orderfoot2" @click="payall">预支付款</div>
       </div>
@@ -73,9 +73,16 @@
         name: "Orderdetail",
       data:function () {
         return{
+          sHows:false,
           pricesall:Number(this.$store.state.orderPay.prices) + Number(this.$store.state.orderPay.prices1),
 
         }
+      },
+      mounted(){
+          if(this.$store.state.orderSate == '待付款'){
+            this.sHows = true;
+          }
+        console.log('0000000000000000',this.$store.state.orderPay)
       },
       methods:{
         delorder(){
@@ -92,7 +99,7 @@
           console.log(this.pricesall)
           this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=addOrder',params)
             .then((res) => {
-              console.log(res)
+              // console.log(res)
               this.$router.push({
                 path: '/pages'
               })
@@ -114,7 +121,7 @@
           console.log(this.pricesall)
           this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=addOrder',params)
             .then((res) => {
-              console.log(res)
+              // console.log(res)
               this.$router.push({
                 path: '/end'
               })

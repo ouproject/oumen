@@ -28,25 +28,25 @@
         </div>
       </div>
     </div>
-    <div class="orderfoot">
-      <div class="travellist">
+    <div class="orderfoot" >
+      <div class="travellist"  v-for="(v,k) in orderData" @click="Details(k)">
         <div class="listorder">
           <img class="flowers" src="../../assets/img/flowers.png">
-          <p class="travename">境外亲子游</p>
-          <div class="findlist">已完成</div>
+          <p class="travename">{{v.tour_name}}</p>
+          <div class="findlist">{{v.state}}</div>
           <p class="monenylist">
             <span class="pay">实付金额：</span>
-            <span class="paymoney">￥3452</span>
+            <span class="paymoney">￥{{(Number(v.old_num)+Number(v.child_num))*Number(v.new_price)}}</span>
           </p>
         </div>
         <div class="navtravel">
           <div class="travelimg">
-            <img class="travelimgsleft" src="../../assets/img/lot1.jpg">
-            <p class="writep">往后余生，你会在哪里，我的生活即将没有你，我们后会有期</p>
+            <img class="travelimgsleft" :src="'http://10.80.7.125/MyRead/'+v.img_addr">
+            <p class="writep">{{v.title}}</p>
           </div>
           <p class="travelcontents">
             <img class="clock" src="../../assets/img/task-management.png">
-            <span class="spantravel1">2018-5-20出发</span>
+            <span class="spantravel1">{{v.starttime}}出发</span>
             <span class="spantravel2">历时半天</span>
           </p>
           <p class="travelcontents">
@@ -55,98 +55,63 @@
           </p>
         </div>
       </div>
-      <div class="travellist">
-        <div class="listorder">
-          <img class="flowers" src="../../assets/img/flowers.png">
-          <p class="travename">境外亲子游</p>
-          <div class="findlist">已完成</div>
-          <p class="monenylist">
-            <span class="pay">实付金额：</span>
-            <span class="paymoney">￥3452</span>
-          </p>
-        </div>
-        <div class="navtravel">
-          <div class="travelimg">
-            <img class="travelimgsleft" src="../../assets/img/lot1.jpg">
-            <p class="writep">往后余生，你会在哪里，我的生活即将没有你，我们后会有期</p>
-          </div>
-          <p class="travelcontents">
-            <img class="clock" src="../../assets/img/task-management.png">
-            <span class="spantravel1">2018-5-20出发</span>
-            <span class="spantravel2">历时半天</span>
-          </p>
-          <p class="travelcontents">
-            <img class="map" src="../../assets/img/map.png">
-            <span class="spantravel3">杭州</span>
-          </p>
-        </div>
-      </div>
-      <div class="travellist">
-        <div class="listorder">
-          <img class="flowers" src="../../assets/img/flowers.png">
-          <p class="travename">境外亲子游</p>
-          <div class="findlist">已完成</div>
-          <p class="monenylist">
-            <span class="pay">实付金额：</span>
-            <span class="paymoney">￥3452</span>
-          </p>
-        </div>
-        <div class="navtravel">
-          <div class="travelimg">
-            <img class="travelimgsleft" src="../../assets/img/lot1.jpg">
-            <p class="writep">往后余生，你会在哪里，我的生活即将没有你，我们后会有期</p>
-          </div>
-          <p class="travelcontents">
-            <img class="clock" src="../../assets/img/task-management.png">
-            <span class="spantravel1">2018-5-20出发</span>
-            <span class="spantravel2">历时半天</span>
-          </p>
-          <p class="travelcontents">
-            <img class="map" src="../../assets/img/map.png">
-            <span class="spantravel3">杭州</span>
-          </p>
-        </div>
-      </div>
-      <div class="travellist">
-        <div class="listorder">
-          <img class="flowers" src="../../assets/img/flowers.png">
-          <p class="travename">境外亲子游</p>
-          <div class="findlist">已完成</div>
-          <p class="monenylist">
-            <span class="pay">实付金额：</span>
-            <span class="paymoney">￥3452</span>
-          </p>
-        </div>
-        <div class="navtravel">
-          <div class="travelimg">
-            <img class="travelimgsleft" src="../../assets/img/lot1.jpg">
-            <p class="writep">往后余生，你会在哪里，我的生活即将没有你，我们后会有期</p>
-          </div>
-          <p class="travelcontents">
-            <img class="clock" src="../../assets/img/task-management.png">
-            <span class="spantravel1">2018-5-20出发</span>
-            <span class="spantravel2">历时半天</span>
-          </p>
-          <p class="travelcontents">
-            <img class="map" src="../../assets/img/map.png">
-            <span class="spantravel3">杭州</span>
-          </p>
-        </div>
-      </div>
+      <!--<div class="travellist">-->
+        <!--<div class="listorder">-->
+          <!--<img class="flowers" src="../../assets/img/flowers.png">-->
+          <!--<p class="travename">境外亲子游</p>-->
+          <!--<div class="findlist">已完成</div>-->
+          <!--<p class="monenylist">-->
+            <!--<span class="pay">实付金额：</span>-->
+            <!--<span class="paymoney">￥3452</span>-->
+          <!--</p>-->
+        <!--</div>-->
+        <!--<div class="navtravel">-->
+          <!--<div class="travelimg">-->
+            <!--<img class="travelimgsleft" src="../../assets/img/lot1.jpg">-->
+            <!--<p class="writep">往后余生，你会在哪里，我的生活即将没有你，我们后会有期</p>-->
+          <!--</div>-->
+          <!--<p class="travelcontents">-->
+            <!--<img class="clock" src="../../assets/img/task-management.png">-->
+            <!--<span class="spantravel1">2018-5-20出发</span>-->
+            <!--<span class="spantravel2">历时半天</span>-->
+          <!--</p>-->
+          <!--<p class="travelcontents">-->
+            <!--<img class="map" src="../../assets/img/map.png">-->
+            <!--<span class="spantravel3">杭州</span>-->
+          <!--</p>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
   </div>
 </div>
 </template>
 
 <script>
+  import Vue from 'vue';
     export default {
         name: "Order",
         data:function(){
           return{
             isShow:false,
             isShows:false,
+            orderData:[]
+
           }
         },
+      computed:{
+      },
+      mounted(){
+        var params = new URLSearchParams();
+        params.append('reg_tel', this.$store.state.loginTel);
+        this.$http.post('http://10.80.7.125/MyRead/index.php?m=Home&c=Tour&a=selOrder',params)
+          .then((res) => {
+            this.orderData= res.data;
+
+
+          }).catch((err) => {
+          console.log(err)
+        })
+      },
       methods:{
         Show(){
           this.isShow = !this.isShow;
@@ -155,9 +120,23 @@
           this.isShows = !this.isShows;
         },
         waitpay(){
-          this.$router.push({
-            path: '/orderdetail',
-          });
+          console.log('-------------初始data-------------------',this.orderData)
+          //var arr = [{a:1,c:true},{a:2,c:false},{a:3,c:true}]
+          // var arr = this.orderData.filter(function(index,el,self){
+          //   return el;
+          // })
+
+          // for(var i=0;i<this.orderData.length;i++){
+          //
+          //   if(this.orderData[i].state != '待付款'){
+          //     this.orderData.splice(this.orderData[i],1);
+          //     console.log('---orderdata------------',this.orderData)
+          //   }
+          // }
+
+          // this.$router.push({
+          //   path: '/orderdetail',
+          // });
         },
         waitgo(){
           this.$router.push({
@@ -170,6 +149,34 @@
           });
         },
         delpay(){
+          this.$router.push({
+            path: '/orderdetail',
+          });
+        },
+        Details(index){
+          var c = {type:'order',sendDatas:this.orderData[index],tour_type:this.orderData[index].tour_name};
+          this.$store.dispatch('getGoodsDatail',c);
+            console.log('kkkkkkkkkkkk',this.orderData)
+
+          var c = this.orderData[index].state;
+          this.$store.commit('OrderSate',c);
+
+
+          var obj= {
+            num:this.orderData[index].old_num,
+            nummber:this.orderData[index].child_num,
+            prices:this.orderData[index].new_price,
+            prices1:this.orderData[index].new_price,
+          }
+          this.$store.commit("orderPrice",obj)
+
+          var objs= {
+            personum:this.orderData[index].user_name,
+            phonenum:this.orderData[index].user_tel,
+          }
+          this.$store.commit("faMily",objs)
+
+
           this.$router.push({
             path: '/orderdetail',
           });
